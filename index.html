@@ -676,11 +676,9 @@
           <stop offset="50%"  stop-color="white" stop-opacity="0.60"/>
           <stop offset="100%" stop-color="white" stop-opacity="0"/>
         </linearGradient>
-        <radialGradient id="rktWin" cx="40%" cy="38%" r="55%">
-          <stop offset="0%"   stop-color="#FFFFFF"/>
-          <stop offset="45%"  stop-color="#B3E5FC"/>
-          <stop offset="100%" stop-color="#64B5F6"/>
-        </radialGradient>
+        <clipPath id="winClip">
+          <circle cx="16" cy="22" r="5.1"/>
+        </clipPath>
         <filter id="rktGlow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="1.8" result="blur"/>
           <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -707,13 +705,19 @@
       <path d="M11 39 L21 39 L19 43 L13 43Z"
             fill="#7B5800" stroke="#1A1A1A" stroke-width="0.8" stroke-linejoin="round"/>
 
-      <!-- Porthole window -->
-      <circle cx="16" cy="22" r="5.2" fill="url(#rktWin)" stroke="#1A1A1A" stroke-width="1.0"/>
-      <!-- Window inner glare highlight -->
-      <path d="M13.8 19.2 C14.4 17.6 16.5 17.1 17.8 18.2 C16.2 18.0 14.5 18.5 13.8 19.2Z"
-            fill="white" opacity="0.90"/>
-      <!-- Window rim shine -->
-      <circle cx="16" cy="22" r="4.4" fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="0.7"/>
+      <!-- Porthole: company logo -->
+      <!-- Silver background behind logo -->
+      <circle cx="16" cy="22" r="5.1" fill="#E8E8E8"/>
+      <!-- Logo image clipped to circle -->
+      <image href="logo.png" x="10.9" y="16.9" width="10.2" height="10.2"
+             clip-path="url(#winClip)" preserveAspectRatio="xMidYMid slice"/>
+      <!-- Gold ring border -->
+      <circle cx="16" cy="22" r="5.1" fill="none" stroke="#FFC107" stroke-width="1.1"/>
+      <!-- Outer dark border for contrast -->
+      <circle cx="16" cy="22" r="5.6" fill="none" stroke="#1A1A1A" stroke-width="0.8"/>
+      <!-- Glass glare highlight -->
+      <path d="M13.8 19.2 C14.4 17.4 16.6 17.0 17.9 18.1 C16.2 17.9 14.4 18.4 13.8 19.2Z"
+            fill="white" opacity="0.80"/>
 
       <!-- Tip bright highlight -->
       <path d="M16 1.5 L13.5 9.5 L18.5 9.5Z"
