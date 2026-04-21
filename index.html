@@ -48,7 +48,8 @@
         linear-gradient(160deg, #d8d8d8 0%, #e2e2e2 40%, #cbcbcb 70%, #d0d0d0 100%);
       min-height: 100vh;
     }
-    @media (pointer: coarse) { body { cursor: auto; } .cursor-dot, .cursor-ring { display: none; } }
+    @media (pointer: coarse) { body { cursor: auto !important; } .cursor-rocket, .cursor-trail, .cursor-burst, .cursor-spark { display: none !important; } }
+    @media (pointer: fine)  { body { cursor: none; } }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; height: auto; }
 
@@ -77,20 +78,86 @@
       letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
     }
 
-    /* ——— Custom cursor ——— */
-    .cursor-dot {
-      position: fixed; width: 9px; height: 9px; border-radius: 50%;
-      background: var(--gold-bright); box-shadow: 0 0 10px rgba(255,193,7,0.60);
-      pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
-      transition: transform 0.12s ease-out; mix-blend-mode: multiply;
+    /* ——— Rocket Cursor ——— */
+    .cursor-rocket {
+      position: fixed; pointer-events: none; z-index: 99999;
+      transform-origin: 16px 1px; /* exact tip of rocket SVG */
+      transform: rotate(35deg);
+      filter: drop-shadow(0 0 8px rgba(255,193,7,0.65));
+      will-change: left, top;
+      transition: filter 0.18s ease, transform 0.18s ease;
     }
-    .cursor-ring {
-      position: fixed; width: 34px; height: 34px; border-radius: 50%;
-      border: 2px solid rgba(255,193,7,0.50); pointer-events: none; z-index: 9998;
+    .cursor-rocket svg { display: block; width: 32px; height: 56px; }
+
+    /* Flame flicker */
+    .flame-outer {
+      transform-origin: 16px 48px;
+      animation: flame-flicker-outer 0.13s ease-in-out infinite alternate;
+    }
+    .flame-mid {
+      transform-origin: 16px 47px;
+      animation: flame-flicker-mid 0.09s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes flame-flicker-outer {
+      from { transform: scaleY(1)    scaleX(1);    opacity: 0.52; }
+      to   { transform: scaleY(1.22) scaleX(0.86); opacity: 0.70; }
+    }
+    @keyframes flame-flicker-mid {
+      from { transform: scaleY(1)    scaleX(1);    opacity: 0.78; }
+      to   { transform: scaleY(1.20) scaleX(0.84); opacity: 0.95; }
+    }
+
+    /* Hover: tilt up, intensify glow, longer flame */
+    body.is-hover .cursor-rocket {
+      transform: rotate(48deg);
+      filter: drop-shadow(0 0 16px rgba(255,193,7,0.95)) drop-shadow(0 0 5px rgba(255,215,0,0.70));
+    }
+    body.is-hover .flame-outer { animation-duration: 0.09s; }
+    body.is-hover .flame-mid   { animation-duration: 0.07s; }
+
+    /* Click: push forward, max glow */
+    body.is-clicking .cursor-rocket {
+      transform: rotate(42deg) scale(1.1) translateY(-3px);
+      filter: drop-shadow(0 0 24px rgba(255,193,7,1.0)) drop-shadow(0 0 10px rgba(255,255,255,0.65));
+      transition: filter 0.06s, transform 0.06s;
+    }
+
+    /* Trail dots */
+    .cursor-trail {
+      position: fixed; pointer-events: none; z-index: 99997; border-radius: 50%;
       transform: translate(-50%, -50%);
-      transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out), border-color 0.2s;
+      animation: cursor-trail-fade 0.45s ease-out forwards;
     }
-    body.is-hover .cursor-ring { width: 50px; height: 50px; border-color: var(--gold); }
+    @keyframes cursor-trail-fade {
+      0%   { opacity: 0.80; transform: translate(-50%,-50%) scale(1); }
+      100% { opacity: 0;    transform: translate(-50%,-50%) scale(0.1); }
+    }
+
+    /* Click burst ring */
+    .cursor-burst {
+      position: fixed; pointer-events: none; z-index: 99996;
+      width: 10px; height: 10px; border-radius: 50%;
+      border: 2px solid rgba(255,193,7,0.95);
+      transform: translate(-50%, -50%);
+      animation: cursor-burst 0.38s ease-out forwards;
+    }
+    @keyframes cursor-burst {
+      0%   { opacity: 1;   transform: translate(-50%,-50%) scale(0); }
+      55%  { opacity: 0.8; }
+      100% { opacity: 0;   transform: translate(-50%,-50%) scale(7); }
+    }
+
+    /* Click sparks */
+    .cursor-spark {
+      position: fixed; pointer-events: none; z-index: 99996;
+      width: 4px; height: 4px; border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: cursor-spark 0.38s ease-out forwards;
+    }
+    @keyframes cursor-spark {
+      0%   { opacity: 1; transform: translate(-50%,-50%) translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(-50%,-50%) translate(var(--sx), var(--sy)) scale(0); }
+    }
 
     /* ——— Ambient ——— */
     .ambient { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
@@ -595,8 +662,77 @@
     </div>
   </div>
 
-  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
-  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+  <!-- Golden Rocket Cursor -->
+  <div class="cursor-rocket" id="cursorRocket" aria-hidden="true">
+    <svg viewBox="0 0 32 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="rktGold" x1="4" y1="0" x2="28" y2="56" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#FFD700"/>
+          <stop offset="48%"  stop-color="#FFC107"/>
+          <stop offset="100%" stop-color="#FFB300"/>
+        </linearGradient>
+        <linearGradient id="rktShine" x1="16" y1="0" x2="26" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="white" stop-opacity="0"/>
+          <stop offset="50%"  stop-color="white" stop-opacity="0.60"/>
+          <stop offset="100%" stop-color="white" stop-opacity="0"/>
+        </linearGradient>
+        <radialGradient id="rktWin" cx="40%" cy="38%" r="55%">
+          <stop offset="0%"   stop-color="#FFFFFF"/>
+          <stop offset="45%"  stop-color="#B3E5FC"/>
+          <stop offset="100%" stop-color="#64B5F6"/>
+        </radialGradient>
+        <filter id="rktGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.8" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Main rocket body -->
+      <path d="M16 1 C22 8 26 20 26 33 L16 40 L6 33 C6 20 10 8 16 1Z"
+            fill="url(#rktGold)" stroke="#1A1A1A" stroke-width="1.1" stroke-linejoin="round"/>
+
+      <!-- Metallic shine strip on body -->
+      <path d="M16 3 C16 3 22 15 22 31 L16 38Z"
+            fill="url(#rktShine)" opacity="0.48"/>
+
+      <!-- Left fin -->
+      <path d="M6 33 L0 46 L12 40Z"
+            fill="#F9A825" stroke="#1A1A1A" stroke-width="0.9" stroke-linejoin="round"/>
+
+      <!-- Right fin -->
+      <path d="M26 33 L32 46 L20 40Z"
+            fill="#F9A825" stroke="#1A1A1A" stroke-width="0.9" stroke-linejoin="round"/>
+
+      <!-- Nozzle base -->
+      <path d="M11 39 L21 39 L19 43 L13 43Z"
+            fill="#7B5800" stroke="#1A1A1A" stroke-width="0.8" stroke-linejoin="round"/>
+
+      <!-- Porthole window -->
+      <circle cx="16" cy="22" r="5.2" fill="url(#rktWin)" stroke="#1A1A1A" stroke-width="1.0"/>
+      <!-- Window inner glare highlight -->
+      <path d="M13.8 19.2 C14.4 17.6 16.5 17.1 17.8 18.2 C16.2 18.0 14.5 18.5 13.8 19.2Z"
+            fill="white" opacity="0.90"/>
+      <!-- Window rim shine -->
+      <circle cx="16" cy="22" r="4.4" fill="none" stroke="rgba(255,255,255,0.38)" stroke-width="0.7"/>
+
+      <!-- Tip bright highlight -->
+      <path d="M16 1.5 L13.5 9.5 L18.5 9.5Z"
+            fill="rgba(255,255,255,0.78)"/>
+
+      <!-- === FLAME === -->
+      <g class="rocket-flame">
+        <!-- Outer diffuse flame -->
+        <ellipse class="flame-outer" cx="16" cy="49" rx="5.8" ry="8.5"
+                 fill="#FFC107" opacity="0.52"/>
+        <!-- Mid glow -->
+        <ellipse class="flame-mid"   cx="16" cy="48" rx="3.8" ry="6.2"
+                 fill="#FFE082" opacity="0.78"/>
+        <!-- Inner white core -->
+        <ellipse cx="16" cy="46.5" rx="2.1" ry="4.0"
+                 fill="white" opacity="0.97"/>
+      </g>
+    </svg>
+  </div>
 
   <div class="ambient" aria-hidden="true">
     <div class="ambient__blob ambient__blob--1"></div>
@@ -1041,26 +1177,90 @@
         });
       }
 
-      /* Custom cursor */
-      var dot = document.getElementById("cursorDot");
-      var ring = document.getElementById("cursorRing");
-      var mx = 0, my = 0, rx = 0, ry = 0;
-      if (dot && ring && window.matchMedia("(pointer: fine)").matches) {
+      /* ——— Golden Rocket Cursor ——— */
+      (function () {
+        if (!window.matchMedia("(pointer: fine)").matches) return;
+        var rocket = document.getElementById("cursorRocket");
+        if (!rocket) return;
+
+        var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+        var lastTrail = 0;
+
+        /* Position: transform-origin is tip (16px,1px), so offset by same */
+        function posRocket() {
+          rocket.style.left = (mx - 16) + "px";
+          rocket.style.top  = (my - 1)  + "px";
+        }
+        posRocket();
+
+        /* Mouse move — update pos + spawn trail */
         document.addEventListener("mousemove", function (e) {
           mx = e.clientX; my = e.clientY;
-          dot.style.left = mx + "px"; dot.style.top = my + "px";
+          posRocket();
+          var now = Date.now();
+          if (now - lastTrail > 32) { spawnTrail(mx, my); lastTrail = now; }
         });
-        function loopRing() {
-          rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
-          ring.style.left = rx + "px"; ring.style.top = ry + "px";
-          requestAnimationFrame(loopRing);
+
+        /* Trail dot */
+        function spawnTrail(x, y) {
+          var t = document.createElement("div");
+          t.className = "cursor-trail";
+          var sz = Math.random() * 4 + 2;
+          var g  = Math.floor(150 + Math.random() * 105);
+          var a  = (Math.random() * 0.45 + 0.25).toFixed(2);
+          t.style.cssText =
+            "left:" + x + "px;top:" + y + "px;" +
+            "width:" + sz + "px;height:" + sz + "px;" +
+            "background:rgba(255," + g + ",7," + a + ");";
+          document.body.appendChild(t);
+          setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 500);
         }
-        loopRing();
-        document.querySelectorAll("a, button, input, textarea, .btn").forEach(function (el) {
+
+        /* Click burst ring + sparks */
+        function spawnBurst(x, y) {
+          /* ring */
+          var b = document.createElement("div");
+          b.className = "cursor-burst";
+          b.style.left = x + "px"; b.style.top = y + "px";
+          document.body.appendChild(b);
+          setTimeout(function () { if (b.parentNode) b.parentNode.removeChild(b); }, 420);
+
+          /* 7 sparks in all directions */
+          for (var i = 0; i < 7; i++) {
+            (function (idx) {
+              var sp = document.createElement("div");
+              sp.className = "cursor-spark";
+              var angle = (idx / 7) * Math.PI * 2 - Math.PI / 2;
+              var dist  = 18 + Math.random() * 20;
+              var hue   = 38 + Math.floor(Math.random() * 24);
+              sp.style.cssText =
+                "left:" + x + "px;top:" + y + "px;" +
+                "--sx:" + (Math.cos(angle) * dist).toFixed(1) + "px;" +
+                "--sy:" + (Math.sin(angle) * dist).toFixed(1) + "px;" +
+                "background:hsl(" + hue + ",100%,62%);" +
+                "animation-delay:" + (idx * 0.018) + "s;";
+              document.body.appendChild(sp);
+              setTimeout(function () { if (sp.parentNode) sp.parentNode.removeChild(sp); }, 420);
+            })(i);
+          }
+        }
+
+        document.addEventListener("mousedown", function (e) {
+          document.body.classList.add("is-clicking");
+          spawnBurst(e.clientX, e.clientY);
+        });
+        document.addEventListener("mouseup", function () {
+          document.body.classList.remove("is-clicking");
+        });
+
+        /* Hover state on interactive elements */
+        document.querySelectorAll(
+          "a, button, input, textarea, .btn, .service-card, .why-item, .talent-marquee__logo, .icon-tile"
+        ).forEach(function (el) {
           el.addEventListener("mouseenter", function () { document.body.classList.add("is-hover"); });
           el.addEventListener("mouseleave", function () { document.body.classList.remove("is-hover"); });
         });
-      }
+      })();
 
       /* Scroll reveal */
       var reveals = document.querySelectorAll(".reveal");
