@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="UV Tech Solutions LLC — Premium IT consulting and digital transformation for American enterprises." />
+  <meta name="description" content="UV Tech Solutions LLC â€” Premium IT consulting and digital transformation for American enterprises." />
   <title>UV Tech Solutions LLC | Powering American Innovation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,19 +16,19 @@
       --surface: #ffffff;
       --silver-light: #e8e8e8;
       --silver-pale: #f2f2f2;
-      --border: rgba(255, 193, 7, 0.28);
+      --border: rgba(200, 160, 32, 0.28);
       --border-silver: rgba(0, 0, 0, 0.10);
-      --gold-deep: #b8860b;
-      --gold-dim: #d4a017;
-      --gold: #FFC107;
-      --gold-bright: #FFD54F;
-      --gold-pale: #FFF8E1;
+      --gold-deep: #7A5A00;
+      --gold-dim:  #9A7810;
+      --gold:      #C8A020;
+      --gold-bright: #D4AA28;
+      --gold-pale: #F2E0B0;
       --dark: #1a1a1a;
       --dark-2: #2d2d2d;
       --text: #1a1a1a;
       --text-muted: #555555;
       --white: #ffffff;
-      --glow: rgba(255, 193, 7, 0.35);
+      --glow: rgba(200, 160, 32, 0.35);
       --radius: 20px;
       --radius-sm: 12px;
       --nav-h: 72px;
@@ -53,7 +53,7 @@
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; height: auto; }
 
-    /* ——— Loader ——— */
+    /* â€”â€”â€” Loader â€”â€”â€” */
     .loader {
       position: fixed; inset: 0; z-index: 10000;
       display: flex; align-items: center; justify-content: center;
@@ -65,25 +65,25 @@
     .loader__mark {
       width: 60px; height: 60px; margin: 0 auto 1rem; border-radius: 50%;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.20), 0 0 0 3px rgba(255,193,7,0.35);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.20), 0 0 0 3px rgba(200,160,32,0.35);
       animation: loader-pulse 1.2s ease-in-out infinite;
     }
     .loader__mark img { width: 100%; height: 100%; object-fit: cover; }
     @keyframes loader-pulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.20), 0 0 0 3px rgba(255,193,7,0.35); }
-      50% { transform: scale(1.08); box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 5px rgba(255,193,7,0.55); }
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.20), 0 0 0 3px rgba(200,160,32,0.35); }
+      50% { transform: scale(1.08); box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 5px rgba(200,160,32,0.55); }
     }
     .loader__text {
       font-family: var(--font-display); font-weight: 700; font-size: 0.85rem;
       letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
     }
 
-    /* ——— Rocket Cursor ——— */
+    /* â€”â€”â€” Rocket Cursor â€”â€”â€” */
     .cursor-rocket {
       position: fixed; pointer-events: none; z-index: 99999;
       transform-origin: 16px 1px; /* exact tip of rocket SVG */
       transform: rotate(35deg);
-      filter: drop-shadow(0 0 8px rgba(255,193,7,0.65));
+      filter: drop-shadow(0 0 8px rgba(200,160,32,0.65));
       will-change: left, top;
       transition: filter 0.18s ease, transform 0.18s ease;
     }
@@ -110,7 +110,7 @@
     /* Hover: tilt up, intensify glow, longer flame */
     body.is-hover .cursor-rocket {
       transform: rotate(48deg);
-      filter: drop-shadow(0 0 16px rgba(255,193,7,0.95)) drop-shadow(0 0 5px rgba(255,215,0,0.70));
+      filter: drop-shadow(0 0 16px rgba(200,160,32,0.95)) drop-shadow(0 0 5px rgba(210,168,28,0.70));
     }
     body.is-hover .flame-outer { animation-duration: 0.09s; }
     body.is-hover .flame-mid   { animation-duration: 0.07s; }
@@ -118,7 +118,7 @@
     /* Click: push forward, max glow */
     body.is-clicking .cursor-rocket {
       transform: rotate(42deg) scale(1.1) translateY(-3px);
-      filter: drop-shadow(0 0 24px rgba(255,193,7,1.0)) drop-shadow(0 0 10px rgba(255,255,255,0.65));
+      filter: drop-shadow(0 0 24px rgba(200,160,32,1.0)) drop-shadow(0 0 10px rgba(255,255,255,0.65));
       transition: filter 0.06s, transform 0.06s;
     }
 
@@ -137,7 +137,7 @@
     .cursor-burst {
       position: fixed; pointer-events: none; z-index: 99996;
       width: 10px; height: 10px; border-radius: 50%;
-      border: 2px solid rgba(255,193,7,0.95);
+      border: 2px solid rgba(200,160,32,0.95);
       transform: translate(-50%, -50%);
       animation: cursor-burst 0.38s ease-out forwards;
     }
@@ -159,7 +159,7 @@
       100% { opacity: 0; transform: translate(-50%,-50%) translate(var(--sx), var(--sy)) scale(0); }
     }
 
-    /* ——— Ambient ——— */
+    /* â€”â€”â€” Ambient â€”â€”â€” */
     .ambient { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
     .ambient__blob {
       position: absolute; border-radius: 50%; filter: blur(100px);
@@ -176,7 +176,7 @@
     }
     .ambient__blob--3 {
       width: min(30vw, 260px); height: min(30vw, 260px); top: 35%; right: 18%; opacity: 0.20;
-      background: radial-gradient(circle, rgba(255,193,7,0.30) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(200,160,32,0.30) 0%, transparent 70%);
       animation-delay: -13s;
     }
     @keyframes blob-float {
@@ -198,11 +198,11 @@
 
     #particle-canvas { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
 
-    /* ——— Layout ——— */
+    /* â€”â€”â€” Layout â€”â€”â€” */
     .page-wrap { position: relative; z-index: 3; min-height: 100vh; }
     .container { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
 
-    /* ——— Nav ——— */
+    /* â€”â€”â€” Nav â€”â€”â€” */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: var(--nav-h); display: flex; align-items: center;
@@ -224,7 +224,7 @@
     }
     .brand__logo-img {
       width: 44px; height: 44px; border-radius: 10px; object-fit: cover;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15), 0 0 0 2px rgba(255,193,7,0.40);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15), 0 0 0 2px rgba(200,160,32,0.40);
       flex-shrink: 0;
     }
     .nav__links { display: flex; align-items: center; gap: 2rem; }
@@ -269,7 +269,7 @@
       .nav__cta-mobile { display: inline-flex; margin-top: 0.75rem; width: 100%; justify-content: center; }
     }
 
-    /* ——— Buttons ——— */
+    /* â€”â€”â€” Buttons â€”â€”â€” */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       gap: 0.5rem; padding: 0.85rem 1.75rem; border-radius: 999px;
@@ -280,7 +280,7 @@
     .btn--primary {
       color: var(--dark);
       background: linear-gradient(135deg, var(--gold-dim) 0%, var(--gold) 50%, var(--gold-bright) 100%);
-      box-shadow: 0 4px 20px rgba(255,193,7,0.40), 0 1px 0 rgba(255,255,255,0.50) inset;
+      box-shadow: 0 4px 20px rgba(200,160,32,0.40), 0 1px 0 rgba(255,255,255,0.50) inset;
     }
     .btn--primary::before {
       content: ""; position: absolute; inset: 0;
@@ -290,7 +290,7 @@
     .btn--primary:hover::before { transform: translateX(120%); }
     .btn--primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(255,193,7,0.55), 0 1px 0 rgba(255,255,255,0.50) inset;
+      box-shadow: 0 8px 28px rgba(200,160,32,0.55), 0 1px 0 rgba(255,255,255,0.50) inset;
     }
     .btn--ghost {
       color: var(--dark); background: rgba(255,255,255,0.55);
@@ -302,7 +302,7 @@
     }
     .btn--block { width: 100%; }
 
-    /* ——— Hero ——— */
+    /* â€”â€”â€” Hero â€”â€”â€” */
     .hero {
       padding: calc(var(--nav-h) + 5rem) 0 6rem;
       position: relative; overflow: hidden;
@@ -322,7 +322,7 @@
       background: var(--gold); border: none;
       margin-bottom: 1.5rem; opacity: 0;
       animation: fade-up 0.9s var(--ease-out) 0.15s forwards;
-      box-shadow: 0 2px 14px rgba(255,193,7,0.45);
+      box-shadow: 0 2px 14px rgba(200,160,32,0.45);
     }
     .eyebrow__dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.45); }
 
@@ -363,7 +363,7 @@
     }
     .hero__card-glow {
       position: absolute; top: -25%; right: -15%; width: 60%; height: 60%;
-      background: radial-gradient(circle, rgba(255,193,7,0.20) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(200,160,32,0.20) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero__svg-wrap {
@@ -375,7 +375,7 @@
     .float-2 { animation: float-y 9s ease-in-out infinite reverse; }
     @keyframes float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-    /* ——— Section common ——— */
+    /* â€”â€”â€” Section common â€”â€”â€” */
     section { padding: 5.5rem 0; position: relative; }
     .section-head { max-width: 560px; margin-bottom: 3rem; }
     .section-head h2 {
@@ -388,7 +388,7 @@
       display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em;
       text-transform: uppercase; color: var(--dark); background: var(--gold);
       padding: 0.25rem 0.75rem; border-radius: 999px; margin-bottom: 1rem;
-      box-shadow: 0 2px 10px rgba(255,193,7,0.35);
+      box-shadow: 0 2px 10px rgba(200,160,32,0.35);
     }
     .reveal {
       opacity: 0; transform: translateY(24px);
@@ -396,7 +396,7 @@
     }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-    /* ——— About ——— */
+    /* â€”â€”â€” About â€”â€”â€” */
     .about { }
     .about__grid { display: grid; gap: 2.5rem; align-items: start; }
     @media (min-width: 800px) { .about__grid { grid-template-columns: 1fr 1fr; gap: 4rem; } }
@@ -417,18 +417,18 @@
     .about__icons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
     .icon-tile {
       padding: 1.5rem 1rem; border-radius: var(--radius-sm);
-      background: rgba(255,255,255,0.70); border: 1.5px solid rgba(255,193,7,0.30);
+      background: rgba(255,255,255,0.70); border: 1.5px solid rgba(200,160,32,0.30);
       box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center;
       transition: transform 0.3s var(--ease-out), border-color 0.3s, box-shadow 0.3s;
     }
     .icon-tile:hover {
       transform: translateY(-4px); border-color: var(--gold);
-      box-shadow: 0 8px 24px rgba(255,193,7,0.22);
+      box-shadow: 0 8px 24px rgba(200,160,32,0.22);
     }
     .icon-tile svg { width: 40px; height: 40px; margin-bottom: 0.5rem; }
     .icon-tile span { display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); }
 
-    /* ——— Stats band ——— */
+    /* â€”â€”â€” Stats band â€”â€”â€” */
     .stats-band {
       padding: 4rem 0;
       background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1f1f1f 100%);
@@ -456,7 +456,7 @@
     }
     .stat-item__label { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.55); letter-spacing: 0.03em; }
 
-    /* ——— Talent marquee ——— */
+    /* â€”â€”â€” Talent marquee â€”â€”â€” */
     .talent-marquee {
       --marquee-gap: clamp(2.5rem, 5vw, 4rem); --logo-h: clamp(28px, 4vw, 40px);
       padding: 5rem 0;
@@ -503,14 +503,14 @@
       object-fit: contain; transition: transform 0.3s;
     }
     .talent-marquee__logo:hover {
-      border-color: var(--gold); box-shadow: 0 4px 20px rgba(255,193,7,0.25);
+      border-color: var(--gold); box-shadow: 0 4px 20px rgba(200,160,32,0.25);
       transform: scale(1.05) translateY(-2px);
     }
     @media (prefers-reduced-motion: reduce) {
       .talent-marquee__row, .talent-marquee__logo { animation: none; }
     }
 
-    /* ——— Services ——— */
+    /* â€”â€”â€” Services â€”â€”â€” */
     .services { }
     .service-cards { display: grid; gap: 1.5rem; }
     @media (min-width: 640px) { .service-cards { grid-template-columns: repeat(2, 1fr); } }
@@ -528,15 +528,15 @@
       transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--ease-out);
     }
     .service-card:hover {
-      transform: translateY(-6px); border-color: rgba(255,193,7,0.40);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(255,193,7,0.20);
+      transform: translateY(-6px); border-color: rgba(200,160,32,0.40);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(200,160,32,0.20);
     }
     .service-card:hover::after { transform: scaleX(1); }
     .service-card__icon {
       width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
       margin-bottom: 1.25rem;
-      background: linear-gradient(145deg, rgba(255,193,7,0.20), rgba(255,193,7,0.08));
-      border: 1.5px solid rgba(255,193,7,0.30);
+      background: linear-gradient(145deg, rgba(200,160,32,0.20), rgba(200,160,32,0.08));
+      border: 1.5px solid rgba(200,160,32,0.30);
     }
     .service-card__icon svg { width: 26px; height: 26px; }
     .service-card h3 {
@@ -545,7 +545,7 @@
     }
     .service-card p { margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
 
-    /* ——— Why ——— */
+    /* â€”â€”â€” Why â€”â€”â€” */
     .why { background: rgba(0,0,0,0.05); }
     .why__list { display: grid; gap: 1.25rem; }
     @media (min-width: 720px) { .why__list { grid-template-columns: repeat(3, 1fr); } }
@@ -556,20 +556,20 @@
       transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
     .why-item:hover {
-      border-color: rgba(255,193,7,0.45); transform: translateY(-3px);
-      box-shadow: 0 10px 36px rgba(0,0,0,0.10), 0 0 0 1px rgba(255,193,7,0.20);
+      border-color: rgba(200,160,32,0.45); transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.10), 0 0 0 1px rgba(200,160,32,0.20);
     }
     .why-item__icon {
       flex-shrink: 0; width: 48px; height: 48px; border-radius: 14px;
       display: grid; place-items: center;
       background: linear-gradient(145deg, var(--gold-bright), var(--gold-dim));
-      box-shadow: 0 4px 14px rgba(255,193,7,0.40);
+      box-shadow: 0 4px 14px rgba(200,160,32,0.40);
     }
     .why-item__icon svg { width: 22px; height: 22px; }
     .why-item h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin: 0 0 0.4rem; color: var(--dark); }
     .why-item p { margin: 0; font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
 
-    /* ——— Contact ——— */
+    /* â€”â€”â€” Contact â€”â€”â€” */
     .contact { background: rgba(0,0,0,0.05); }
     .contact__grid { display: grid; gap: 3rem; }
     @media (min-width: 860px) { .contact__grid { grid-template-columns: 1fr 1.1fr; align-items: start; } }
@@ -595,14 +595,14 @@
     .form-group input::placeholder, .form-group textarea::placeholder { color: #9a9a9a; }
     .form-group input:focus, .form-group textarea:focus {
       outline: none; border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(255,193,7,0.18); background: rgba(255,255,255,0.95);
+      box-shadow: 0 0 0 3px rgba(200,160,32,0.18); background: rgba(255,255,255,0.95);
     }
     .form-group textarea { min-height: 140px; resize: vertical; }
     .contact__honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
     .form-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; }
     .form-success {
       display: none; padding: 1rem; border-radius: var(--radius-sm);
-      background: rgba(255,193,7,0.15); border: 1.5px solid rgba(255,193,7,0.40);
+      background: rgba(200,160,32,0.15); border: 1.5px solid rgba(200,160,32,0.40);
       color: var(--gold-deep); font-size: 0.9rem; margin-top: 1rem;
     }
     .form-success.is-visible { display: block; }
@@ -614,7 +614,7 @@
     .form-error.is-visible { display: block; }
     .btn.is-loading { pointer-events: none; opacity: 0.7; }
 
-    /* ——— Footer ——— */
+    /* â€”â€”â€” Footer â€”â€”â€” */
     footer { padding: 3.5rem 0 4rem; background: #141414; color: rgba(255,255,255,0.80); }
     .footer__grid {
       display: flex; flex-direction: column; gap: 2rem; align-items: center; text-align: center;
@@ -632,22 +632,22 @@
     .footer__badge {
       display: inline-flex; align-items: center; gap: 0.4rem;
       font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: rgba(255,193,7,0.45); margin-top: 0.5rem;
+      text-transform: uppercase; color: rgba(200,160,32,0.45); margin-top: 0.5rem;
     }
     .footer__badge::before {
       content: ""; display: inline-block; width: 5px; height: 5px;
-      border-radius: 50%; background: rgba(255,193,7,0.40);
+      border-radius: 50%; background: rgba(200,160,32,0.40);
     }
     .social { display: flex; gap: 0.75rem; }
     .social a {
       width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,193,7,0.18);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(200,160,32,0.18);
       color: rgba(255,255,255,0.45);
       transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.25s;
     }
     .social a:hover {
       color: var(--gold); border-color: var(--gold);
-      background: rgba(255,193,7,0.10); transform: translateY(-3px);
+      background: rgba(200,160,32,0.10); transform: translateY(-3px);
     }
     .social svg { width: 18px; height: 18px; }
   </style>
@@ -667,9 +667,9 @@
     <svg viewBox="0 0 32 56" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="rktGold" x1="4" y1="0" x2="28" y2="56" gradientUnits="userSpaceOnUse">
-          <stop offset="0%"   stop-color="#FFD700"/>
-          <stop offset="48%"  stop-color="#FFC107"/>
-          <stop offset="100%" stop-color="#FFB300"/>
+          <stop offset="0%"   stop-color="#D4AA28"/>
+          <stop offset="48%"  stop-color="#C8A020"/>
+          <stop offset="100%" stop-color="#9A7810"/>
         </linearGradient>
         <linearGradient id="rktShine" x1="16" y1="0" x2="26" y2="0" gradientUnits="userSpaceOnUse">
           <stop offset="0%"   stop-color="white" stop-opacity="0"/>
@@ -695,15 +695,15 @@
 
       <!-- Left fin -->
       <path d="M6 33 L0 46 L12 40Z"
-            fill="#F9A825" stroke="#1A1A1A" stroke-width="0.9" stroke-linejoin="round"/>
+            fill="#B89018" stroke="#1A1A1A" stroke-width="0.9" stroke-linejoin="round"/>
 
       <!-- Right fin -->
       <path d="M26 33 L32 46 L20 40Z"
-            fill="#F9A825" stroke="#1A1A1A" stroke-width="0.9" stroke-linejoin="round"/>
+            fill="#B89018" stroke="#1A1A1A" stroke-width="0.9" stroke-linejoin="round"/>
 
       <!-- Nozzle base -->
       <path d="M11 39 L21 39 L19 43 L13 43Z"
-            fill="#7B5800" stroke="#1A1A1A" stroke-width="0.8" stroke-linejoin="round"/>
+            fill="#5C3E00" stroke="#1A1A1A" stroke-width="0.8" stroke-linejoin="round"/>
 
       <!-- Porthole: company logo -->
       <!-- Silver background behind logo -->
@@ -712,7 +712,7 @@
       <image href="logo.png" x="10.9" y="16.9" width="10.2" height="10.2"
              clip-path="url(#winClip)" preserveAspectRatio="xMidYMid slice"/>
       <!-- Gold ring border -->
-      <circle cx="16" cy="22" r="5.1" fill="none" stroke="#FFC107" stroke-width="1.1"/>
+      <circle cx="16" cy="22" r="5.1" fill="none" stroke="#C8A020" stroke-width="1.1"/>
       <!-- Outer dark border for contrast -->
       <circle cx="16" cy="22" r="5.6" fill="none" stroke="#1A1A1A" stroke-width="0.8"/>
       <!-- Glass glare highlight -->
@@ -727,10 +727,10 @@
       <g class="rocket-flame">
         <!-- Outer diffuse flame -->
         <ellipse class="flame-outer" cx="16" cy="49" rx="5.8" ry="8.5"
-                 fill="#FFC107" opacity="0.52"/>
+                 fill="#C8A020" opacity="0.52"/>
         <!-- Mid glow -->
         <ellipse class="flame-mid"   cx="16" cy="48" rx="3.8" ry="6.2"
-                 fill="#FFE082" opacity="0.78"/>
+                 fill="#D0A832" opacity="0.78"/>
         <!-- Inner white core -->
         <ellipse cx="16" cy="46.5" rx="2.1" ry="4.0"
                  fill="white" opacity="0.97"/>
@@ -778,7 +778,7 @@
             <h1>
               <span class="gradient-text">UV Tech Solutions</span><br />LLC
             </h1>
-            <p class="hero__tagline">Powering American Innovation — strategy, engineering, and cloud delivery for ambitious enterprises across the United States.</p>
+            <p class="hero__tagline">Powering American Innovation â€” strategy, engineering, and cloud delivery for ambitious enterprises across the United States.</p>
             <div class="hero__actions">
               <a href="#contact" class="btn btn--primary">Get Started</a>
               <a href="#services" class="btn btn--ghost">Explore Services</a>
@@ -816,7 +816,7 @@
                   <circle cx="200" cy="155" r="30" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.8"/>
                   <circle cx="200" cy="155" r="9" fill="url(#g1)"/>
                   <!-- Side info card -->
-                  <rect x="265" y="115" width="105" height="85" rx="12" fill="rgba(255,253,240,0.95)" stroke="rgba(200,146,14,0.35)" stroke-width="1.2"/>
+                  <rect x="265" y="115" width="105" height="85" rx="12" fill="rgba(255,253,240,0.95)" stroke="rgba(200,160,32,0.35)" stroke-width="1.2"/>
                   <rect x="278" y="132" width="55" height="6" rx="3" fill="rgba(200,146,14,0.60)"/>
                   <rect x="278" y="146" width="40" height="4" rx="2" fill="rgba(200,146,14,0.30)"/>
                   <rect x="278" y="158" width="48" height="4" rx="2" fill="rgba(26,22,16,0.14)"/>
@@ -870,12 +870,12 @@
           <div class="section-head reveal">
             <p class="section-label">About</p>
             <h2>Technology partners for the modern American enterprise</h2>
-            <p>We help US organizations design, build, and scale resilient digital products — from first architecture sketch to production-grade cloud operations.</p>
+            <p>We help US organizations design, build, and scale resilient digital products â€” from first architecture sketch to production-grade cloud operations.</p>
           </div>
           <div class="about__grid">
             <div class="glass-panel reveal">
-              <p style="margin: 0 0 1rem; color: var(--text-muted); line-height: 1.75;">UV Tech Solutions LLC blends deep engineering craft with pragmatic consulting. Whether you are modernizing legacy systems or launching a new platform, we align technology with business outcomes — clear roadmaps, measurable milestones, and teams that ship.</p>
-              <p style="margin: 0; color: var(--text-muted); line-height: 1.75;">Based in the United States, our engagements span advisory, delivery, and talent — so you get continuity from strategy through execution, all within US compliance and security standards.</p>
+              <p style="margin: 0 0 1rem; color: var(--text-muted); line-height: 1.75;">UV Tech Solutions LLC blends deep engineering craft with pragmatic consulting. Whether you are modernizing legacy systems or launching a new platform, we align technology with business outcomes â€” clear roadmaps, measurable milestones, and teams that ship.</p>
+              <p style="margin: 0; color: var(--text-muted); line-height: 1.75;">Based in the United States, our engagements span advisory, delivery, and talent â€” so you get continuity from strategy through execution, all within US compliance and security standards.</p>
             </div>
             <div class="reveal">
               <div class="about__icons">
@@ -958,7 +958,7 @@
           <div class="section-head reveal">
             <p class="section-label">Services</p>
             <h2>End-to-end capabilities</h2>
-            <p>Focused offerings that scale with your roadmap — from greenfield builds to enterprise integration across the US market.</p>
+            <p>Focused offerings that scale with your roadmap â€” from greenfield builds to enterprise integration across the US market.</p>
           </div>
           <div class="service-cards">
             <article class="service-card reveal">
@@ -969,7 +969,7 @@
                 </svg>
               </div>
               <h3>Software Development</h3>
-              <p>Full-stack product teams, APIs, and platforms built for maintainability and speed of iteration — shipped to meet US enterprise standards.</p>
+              <p>Full-stack product teams, APIs, and platforms built for maintainability and speed of iteration â€” shipped to meet US enterprise standards.</p>
             </article>
             <article class="service-card reveal">
               <div class="service-card__icon">
@@ -979,7 +979,7 @@
                 </svg>
               </div>
               <h3>Cloud Solutions</h3>
-              <p>Secure, cost-aware architectures on AWS, Azure, and GCP — IaC, observability, and resilient operations optimized for US data residency.</p>
+              <p>Secure, cost-aware architectures on AWS, Azure, and GCP â€” IaC, observability, and resilient operations optimized for US data residency.</p>
             </article>
             <article class="service-card reveal">
               <div class="service-card__icon">
@@ -999,7 +999,7 @@
                 </svg>
               </div>
               <h3>Staffing Solutions</h3>
-              <p>Curated US-based talent for critical initiatives — W2 contractors and specialists who integrate seamlessly with your team culture.</p>
+              <p>Curated US-based talent for critical initiatives â€” W2 contractors and specialists who integrate seamlessly with your team culture.</p>
             </article>
           </div>
         </div>
@@ -1010,7 +1010,7 @@
           <div class="section-head reveal">
             <p class="section-label">Why choose us</p>
             <h2>Built for outcomes, not slides</h2>
-            <p>We obsess over clarity, craft, and continuity — so your roadmap stays executable long after kickoff.</p>
+            <p>We obsess over clarity, craft, and continuity â€” so your roadmap stays executable long after kickoff.</p>
           </div>
           <div class="why__list">
             <div class="why-item reveal">
@@ -1032,7 +1032,7 @@
               </div>
               <div>
                 <h3>Reliability</h3>
-                <p>Operational maturity — monitoring, SOC 2-aligned security practices, and documentation you can depend on.</p>
+                <p>Operational maturity â€” monitoring, SOC 2-aligned security practices, and documentation you can depend on.</p>
               </div>
             </div>
             <div class="why-item reveal">
@@ -1044,7 +1044,7 @@
               </div>
               <div>
                 <h3>Innovation</h3>
-                <p>Practical adoption of modern tooling — AI, automation, and cloud-native patterns where they reduce risk and add real value.</p>
+                <p>Practical adoption of modern tooling â€” AI, automation, and cloud-native patterns where they reduce risk and add real value.</p>
               </div>
             </div>
           </div>
@@ -1057,7 +1057,7 @@
             <div class="reveal">
               <p class="section-label">Contact</p>
               <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.1rem); margin: 0 0 1rem; letter-spacing: -0.025em; color: var(--dark);">Let's build what's next</h2>
-              <p style="margin: 0; color: var(--text-muted); max-width: 36ch;">Tell us about your goals — we'll respond with a clear next step. No jargon, no endless back-and-forth.</p>
+              <p style="margin: 0; color: var(--text-muted); max-width: 36ch;">Tell us about your goals â€” we'll respond with a clear next step. No jargon, no endless back-and-forth.</p>
               <div class="contact__direct">
                 <div>
                   <span>Phone</span>
@@ -1106,7 +1106,7 @@
               </div>
               <button type="submit" class="btn btn--primary btn--block" id="contactSubmit">Send message</button>
               <p class="form-note">We'll reply within one business day. Your details are kept private and never shared.</p>
-              <p class="form-success" id="formSuccess" role="status">Thank you — we received your message and will get back to you soon.</p>
+              <p class="form-success" id="formSuccess" role="status">Thank you â€” we received your message and will get back to you soon.</p>
               <p class="form-error" id="formError" role="alert">Something went wrong. Please try again or email us directly.</p>
             </form>
           </div>
@@ -1121,8 +1121,8 @@
             <img src="logo.png" alt="UV Tech Solutions LLC" class="footer__logo-img" />
             <span class="footer__brand">UV Tech Solutions LLC</span>
           </div>
-          <p class="footer__meta">© <span id="year"></span> UV Tech Solutions LLC. Powering American Innovation.</p>
-          <p class="footer__badge">Registered LLC · United States</p>
+          <p class="footer__meta">Â© <span id="year"></span> UV Tech Solutions LLC. Powering American Innovation.</p>
+          <p class="footer__badge">Registered LLC Â· United States</p>
         </div>
         <div class="social" aria-label="Social links">
           <a href="#" aria-label="LinkedIn">
@@ -1181,7 +1181,7 @@
         });
       }
 
-      /* ——— Golden Rocket Cursor ——— */
+      /* â€”â€”â€” Golden Rocket Cursor â€”â€”â€” */
       (function () {
         if (!window.matchMedia("(pointer: fine)").matches) return;
         var rocket = document.getElementById("cursorRocket");
@@ -1197,7 +1197,7 @@
         }
         posRocket();
 
-        /* Mouse move — update pos + spawn trail */
+        /* Mouse move â€” update pos + spawn trail */
         document.addEventListener("mousemove", function (e) {
           mx = e.clientX; my = e.clientY;
           posRocket();
@@ -1210,12 +1210,15 @@
           var t = document.createElement("div");
           t.className = "cursor-trail";
           var sz = Math.random() * 4 + 2;
-          var g  = Math.floor(150 + Math.random() * 105);
-          var a  = (Math.random() * 0.45 + 0.25).toFixed(2);
+          /* Trail uses the logo's rich gold palette — r:190-210, g:140-165, b:20-35 */
+          var r  = Math.floor(188 + Math.random() * 22);
+          var g  = Math.floor(138 + Math.random() * 28);
+          var b  = Math.floor(18  + Math.random() * 18);
+          var a  = (Math.random() * 0.45 + 0.28).toFixed(2);
           t.style.cssText =
             "left:" + x + "px;top:" + y + "px;" +
             "width:" + sz + "px;height:" + sz + "px;" +
-            "background:rgba(255," + g + ",7," + a + ");";
+            "background:rgba(" + r + "," + g + "," + b + "," + a + ");";
           document.body.appendChild(t);
           setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 500);
         }
@@ -1236,12 +1239,13 @@
               sp.className = "cursor-spark";
               var angle = (idx / 7) * Math.PI * 2 - Math.PI / 2;
               var dist  = 18 + Math.random() * 20;
-              var hue   = 38 + Math.floor(Math.random() * 24);
+              /* Sparks: rich gold hue 38-46°, reduced lightness for logo-authentic gold */
+              var hue   = 38 + Math.floor(Math.random() * 8);
               sp.style.cssText =
                 "left:" + x + "px;top:" + y + "px;" +
                 "--sx:" + (Math.cos(angle) * dist).toFixed(1) + "px;" +
                 "--sy:" + (Math.sin(angle) * dist).toFixed(1) + "px;" +
-                "background:hsl(" + hue + ",100%,62%);" +
+                "background:hsl(" + hue + ",90%,48%);" +
                 "animation-delay:" + (idx * 0.018) + "s;";
               document.body.appendChild(sp);
               setTimeout(function () { if (sp.parentNode) sp.parentNode.removeChild(sp); }, 420);
@@ -1314,7 +1318,7 @@
         };
         Particle.prototype.draw = function () {
           ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(255, 193, 7, " + this.a + ")"; ctx.fill();
+          ctx.fillStyle = "rgba(200, 160, 32, " + this.a + ")"; ctx.fill();
         };
         function initParticles() {
           particles = [];
@@ -1330,7 +1334,7 @@
               var dist = Math.sqrt(dx * dx + dy * dy);
               if (dist < 110) {
                 ctx.beginPath();
-                ctx.strokeStyle = "rgba(255, 193, 7, " + (0.15 * (1 - dist / 110)) + ")";
+                ctx.strokeStyle = "rgba(200, 160, 32, " + (0.15 * (1 - dist / 110)) + ")";
                 ctx.lineWidth = 0.6;
                 ctx.moveTo(particles[a].x, particles[a].y); ctx.lineTo(particles[b].x, particles[b].y);
                 ctx.stroke();
@@ -1344,7 +1348,7 @@
         tick();
       }
 
-      /* Contact form — Netlify Forms */
+      /* Contact form â€” Netlify Forms */
       var form = document.getElementById("contactForm");
       var successEl = document.getElementById("formSuccess");
       var errorEl = document.getElementById("formError");
@@ -1352,13 +1356,13 @@
       if (form) {
         form.addEventListener("submit", function (e) {
           e.preventDefault();
-          if (successEl) { successEl.classList.remove("is-visible"); successEl.textContent = "Thank you — we received your message and will get back to you soon."; }
+          if (successEl) { successEl.classList.remove("is-visible"); successEl.textContent = "Thank you â€” we received your message and will get back to you soon."; }
           if (errorEl) { errorEl.classList.remove("is-visible"); errorEl.textContent = "Something went wrong. Please try again or email us directly."; }
           var proto = window.location.protocol;
           if (proto !== "http:" && proto !== "https:") {
             var nameEl = document.getElementById("name"), emailEl = document.getElementById("email"), msgEl = document.getElementById("message");
             var nameVal = nameEl ? nameEl.value.trim() : "", emailVal = emailEl ? emailEl.value.trim() : "", msgVal = msgEl ? msgEl.value.trim() : "";
-            var subj = encodeURIComponent("Contact — " + (nameVal || "UV Tech Solutions site"));
+            var subj = encodeURIComponent("Contact â€” " + (nameVal || "UV Tech Solutions site"));
             var body = encodeURIComponent("Name: " + nameVal + "\nEmail: " + emailVal + "\n\nMessage:\n" + msgVal);
             window.location.href = "mailto:info@uvtechsolutionllc.com?subject=" + subj + "&body=" + body;
             if (successEl) { successEl.textContent = "Your email app should open with this draft. Send it to reach us directly."; successEl.classList.add("is-visible"); successEl.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
@@ -1388,3 +1392,4 @@
   </script>
 </body>
 </html>
+
