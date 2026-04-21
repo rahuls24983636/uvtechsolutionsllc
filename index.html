@@ -934,11 +934,11 @@
               <div class="contact__direct">
                 <div>
                   <span>Phone</span>
-                  <a href="tel:+1XXXXXXXXXX">+1 (XXX) XXX-XXXX</a>
+                  <a href="tel:+17375306365">+1 737 530 6365</a>
                 </div>
                 <div>
                   <span>Email</span>
-                  <a href="mailto:info@uvtechsolutions.com">info@uvtechsolutions.com</a>
+                  <a href="mailto:info@uvtechsolutionllc.com">info@uvtechsolutionllc.com</a>
                 </div>
                 <div>
                   <span>Location</span>
@@ -1166,7 +1166,7 @@
             var nameVal = nameEl ? nameEl.value.trim() : "", emailVal = emailEl ? emailEl.value.trim() : "", msgVal = msgEl ? msgEl.value.trim() : "";
             var subj = encodeURIComponent("Contact — " + (nameVal || "UV Tech Solutions site"));
             var body = encodeURIComponent("Name: " + nameVal + "\nEmail: " + emailVal + "\n\nMessage:\n" + msgVal);
-            window.location.href = "mailto:info@uvtechsolutions.com?subject=" + subj + "&body=" + body;
+            window.location.href = "mailto:info@uvtechsolutionllc.com?subject=" + subj + "&body=" + body;
             if (successEl) { successEl.textContent = "Your email app should open with this draft. Send it to reach us directly."; successEl.classList.add("is-visible"); successEl.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
             return;
           }
@@ -1183,7 +1183,7 @@
               form.reset();
             })
             .catch(function (err) {
-              if (errorEl) { errorEl.textContent = "Something went wrong (error: " + err.message + "). Please email us at info@uvtechsolutions.com."; errorEl.classList.add("is-visible"); errorEl.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+              if (errorEl) { errorEl.textContent = "Something went wrong (error: " + err.message + "). Please email us at info@uvtechsolutionllc.com."; errorEl.classList.add("is-visible"); errorEl.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
             })
             .finally(function () {
               if (submitBtn) { submitBtn.classList.remove("is-loading"); submitBtn.disabled = false; }
