@@ -1270,6 +1270,131 @@
         });
       })();
 
+      /* ——— Logo Hero: Particles + Cursor Interactions ——— */
+      (function () {
+        var panel   = document.getElementById("logoPanel");
+        var cvs     = document.getElementById("logoParticles");
+        var glowEl  = document.getElementById("logoCursorGlow");
+        if (!panel || !cvs) return;
+
+        /* ── Particle system ──────────────────────────────── */
+        var ctx = cvs.getContext("2d");
+        var W = 0, H = 0, pts = [];
+        var DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+        function resizeCvs() {
+          W = panel.offsetWidth; H = panel.offsetHeight;
+          cvs.width  = W * DPR; cvs.height = H * DPR;
+          cvs.style.width = W + "px"; cvs.style.height = H + "px";
+          ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+        }
+
+        function Pt() {
+          this.x  = Math.random() * W;
+          this.y  = H + Math.random() * 20;          /* start below */
+          this.vy = -(Math.random() * 0.55 + 0.18);  /* drift up */
+          this.vx = (Math.random() - 0.5) * 0.22;
+          this.r  = Math.random() * 2.0 + 0.6;
+          this.a  = 0;
+          this.maxA = Math.random() * 0.45 + 0.15;
+          this.life = 0;
+          this.maxLife = Math.random() * 280 + 160;
+        }
+        Pt.prototype.step = function () {
+          this.life++;
+          var prog = this.life / this.maxLife;
+          /* fade in 15%, hold, fade out last 30% */
+          this.a = prog < 0.15 ? (prog / 0.15) * this.maxA
+                 : prog > 0.70 ? ((1 - prog) / 0.30) * this.maxA
+                 : this.maxA;
+          this.x += this.vx; this.y += this.vy;
+          /* slight sway */
+          this.vx += (Math.random() - 0.5) * 0.012;
+          return this.life < this.maxLife;
+        };
+        Pt.prototype.draw = function () {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          /* Alternate between warm gold and bright white for shimmer */
+          var gold = Math.random() > 0.4;
+          ctx.fillStyle = gold
+            ? "rgba(200,160,32," + this.a.toFixed(2) + ")"
+            : "rgba(255,245,210," + (this.a * 0.8).toFixed(2) + ")";
+          ctx.fill();
+        };
+
+        function initPts() {
+          pts = [];
+          var n = Math.min(55, Math.floor((W * H) / 6500));
+          for (var i = 0; i < n; i++) {
+            var p = new Pt();
+            p.y     = Math.random() * H;   /* scatter vertically at start */
+            p.life  = Math.floor(Math.random() * p.maxLife);
+            pts.push(p);
+          }
+        }
+
+        var rafId;
+        function tick() {
+          ctx.clearRect(0, 0, W, H);
+          pts = pts.filter(function (p) { return p.step(); });
+          pts.forEach(function (p) { p.draw(); });
+          /* Replenish */
+          if (Math.random() < 0.30) pts.push(new Pt());
+          rafId = requestAnimationFrame(tick);
+        }
+
+        resizeCvs(); initPts(); tick();
+        var roTimer;
+        var ro = window.ResizeObserver
+          ? new ResizeObserver(function () {
+              clearTimeout(roTimer);
+              roTimer = setTimeout(function () { resizeCvs(); initPts(); }, 150);
+            })
+          : null;
+        if (ro) ro.observe(panel);
+
+        /* ── Cursor proximity glow ────────────────────────── */
+        if (window.matchMedia("(pointer: fine)").matches && glowEl) {
+          document.addEventListener("mousemove", function (e) {
+            var rect = panel.getBoundingClientRect();
+            var cx = e.clientX - rect.left;
+            var cy = e.clientY - rect.top;
+            var inside = cx >= 0 && cy >= 0 && cx <= rect.width && cy <= rect.height;
+
+            if (inside) {
+              glowEl.style.setProperty("--cx", cx + "px");
+              glowEl.style.setProperty("--cy", cy + "px");
+              panel.classList.add("is-near");
+            } else {
+              /* still show if cursor within 80px of panel */
+              var dx = Math.max(0, Math.max(rect.left - e.clientX, e.clientX - rect.right));
+              var dy = Math.max(0, Math.max(rect.top  - e.clientY, e.clientY - rect.bottom));
+              if (Math.sqrt(dx*dx + dy*dy) < 80) {
+                panel.classList.add("is-near");
+              } else {
+                panel.classList.remove("is-near");
+              }
+            }
+          });
+        }
+
+        /* ── Click ripple inside panel ───────────────────── */
+        panel.addEventListener("click", function (e) {
+          var rect = panel.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          var y = e.clientY - rect.top;
+          var rip = document.createElement("div");
+          var sz  = Math.max(rect.width, rect.height) * 0.4;
+          rip.className = "logo-ripple";
+          rip.style.cssText =
+            "left:" + x + "px;top:" + y + "px;" +
+            "width:" + sz + "px;height:" + sz + "px;";
+          panel.appendChild(rip);
+          setTimeout(function () { if (rip.parentNode) rip.parentNode.removeChild(rip); }, 820);
+        });
+      })();
+
       /* Scroll reveal */
       var reveals = document.querySelectorAll(".reveal");
       if (reveals.length && "IntersectionObserver" in window) {
@@ -1392,4 +1517,6 @@
   </script>
 </body>
 </html>
+
+
 
