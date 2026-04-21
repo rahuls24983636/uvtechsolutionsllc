@@ -1,0 +1,7 @@
+{
+  "name": "uv-tech-solutions-llc",
+  "private": true,
+  "scripts": {
+    "dev": "npx --yes netlify-cli dev"
+  }
+}
