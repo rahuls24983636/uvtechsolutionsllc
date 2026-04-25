@@ -1,89 +1,118 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="UV Tech Solutions LLC â€” Premium IT consulting and digital transformation for American enterprises." />
+  <meta name="description" content="UV Tech Solutions LLC — Premium IT consulting and digital transformation for American enterprises." />
   <title>UV Tech Solutions LLC | Powering American Innovation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #d4d4d4;
-      --bg-alt: #c8c8c8;
-      --bg-deep: #b8b8b8;
+      --bg: #d9d9d9;
+      --bg-alt: #cfcfcf;
+      --bg-deep: #bdbdbd;
       --surface: #ffffff;
       --silver-light: #e8e8e8;
       --silver-pale: #f2f2f2;
-      --border: rgba(200, 160, 32, 0.28);
+      --border: rgba(242, 201, 76, 0.28);
       --border-silver: rgba(0, 0, 0, 0.10);
-      --gold-deep: #7A5A00;
-      --gold-dim:  #9A7810;
-      --gold:      #C8A020;
-      --gold-bright: #D4AA28;
-      --gold-pale: #F2E0B0;
+      /* Primary gold palette (premium metallic) */
+      --gold-deep: #D4A62A;      /* Deep Gold */
+      --gold-dim:  #E6B83A;      /* Golden Amber */
+      --gold:      #F2C94C;      /* Warm Yellow */
+      --gold-bright: #F6D36A;    /* Soft Gold */
+      --gold-pale: #FAE79C;      /* Light Highlight */
       --dark: #1a1a1a;
       --dark-2: #2d2d2d;
       --text: #1a1a1a;
       --text-muted: #555555;
       --white: #ffffff;
-      --glow: rgba(200, 160, 32, 0.35);
+      --glow: rgba(242, 201, 76, 0.35);
       --radius: 20px;
       --radius-sm: 12px;
-      --nav-h: 72px;
+      --ribbon-h: 38px;          /* ~1cm ribbon */
+      --notice-h: 28px;          /* E-Verified notice bar */
+      --ribbon-gap: 19px;        /* ~0.5cm gap below ribbon */
+      --nav-h: calc(84px + var(--ribbon-h) + var(--notice-h) + var(--ribbon-gap));
       --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-      --font-display: "Sora", system-ui, sans-serif;
-      --font-body: "Manrope", system-ui, sans-serif;
+      --font-display: "Montserrat", system-ui, sans-serif;
+      --font-body: "Montserrat", system-ui, sans-serif;
+      --font-hero: "Orbitron", "Montserrat", system-ui, sans-serif;
     }
+
+  </style>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    html { -webkit-tap-highlight-color: transparent; }
 
     body {
       margin: 0; font-family: var(--font-body); font-size: 16px; line-height: 1.65;
       color: var(--text); overflow-x: hidden; cursor: none;
       background:
-        linear-gradient(160deg, #d8d8d8 0%, #e2e2e2 40%, #cbcbcb 70%, #d0d0d0 100%);
+        radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.0) 60%),
+        radial-gradient(900px 650px at 10% 90%, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.0) 55%),
+        linear-gradient(160deg, #dcdcdc 0%, #ededed 32%, #cfcfcf 68%, #d7d7d7 100%);
       min-height: 100vh;
     }
     @media (pointer: coarse) { body { cursor: auto !important; } .cursor-rocket, .cursor-trail, .cursor-burst, .cursor-spark { display: none !important; } }
     @media (pointer: fine)  { body { cursor: none; } }
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; height: auto; }
+    a, button { touch-action: manipulation; }
 
-    /* â€”â€”â€” Loader â€”â€”â€” */
+    /* Softer iPhone-like press feedback */
+    .btn, .nav__toggle, .social a, .nav__links a {
+      -webkit-user-select: none;
+      user-select: none;
+      transform: translateZ(0);
+    }
+    .btn:active, .nav__toggle:active, .social a:active {
+      transform: translateY(1px) scale(0.985);
+      filter: saturate(1.02);
+    }
+    .nav__links a:active {
+      opacity: 0.82;
+    }
+
+    /* ——— Loader ——— */
     .loader {
       position: fixed; inset: 0; z-index: 10000;
       display: flex; align-items: center; justify-content: center;
-      background: #d8d8d8;
+      background:
+        radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.0) 60%),
+        radial-gradient(900px 650px at 10% 90%, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.0) 55%),
+        linear-gradient(160deg, #dcdcdc 0%, #ededed 32%, #cfcfcf 68%, #d7d7d7 100%);
       transition: opacity 0.7s var(--ease-out), visibility 0.7s;
     }
     .loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     .loader__inner { text-align: center; }
     .loader__mark {
-      width: 60px; height: 60px; margin: 0 auto 1rem; border-radius: 50%;
+      width: min(70vmin, 520px);
+      height: min(70vmin, 520px);
+      margin: 0 auto;
+      border-radius: 28px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.20), 0 0 0 3px rgba(200,160,32,0.35);
-      animation: loader-pulse 1.2s ease-in-out infinite;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.20), 0 0 0 3px rgba(242,201,76,0.35);
+      animation: loader-pulse 1.35s ease-in-out infinite;
     }
     .loader__mark img { width: 100%; height: 100%; object-fit: cover; }
     @keyframes loader-pulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.20), 0 0 0 3px rgba(200,160,32,0.35); }
-      50% { transform: scale(1.08); box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 5px rgba(200,160,32,0.55); }
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.20), 0 0 0 3px rgba(242,201,76,0.35); }
+      50% { transform: scale(1.08); box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 5px rgba(242,201,76,0.55); }
     }
-    .loader__text {
-      font-family: var(--font-display); font-weight: 700; font-size: 0.85rem;
-      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
-    }
+    .loader__text { display: none; }
 
-    /* â€”â€”â€” Rocket Cursor â€”â€”â€” */
+
+    /* ——— Rocket Cursor ——— */
     .cursor-rocket {
       position: fixed; pointer-events: none; z-index: 99999;
       transform-origin: 16px 1px; /* exact tip of rocket SVG */
       transform: rotate(35deg);
-      filter: drop-shadow(0 0 8px rgba(200,160,32,0.65));
+      filter: drop-shadow(0 0 8px rgba(242,201,76,0.65));
       will-change: left, top;
       transition: filter 0.18s ease, transform 0.18s ease;
     }
@@ -110,7 +139,7 @@
     /* Hover: tilt up, intensify glow, longer flame */
     body.is-hover .cursor-rocket {
       transform: rotate(48deg);
-      filter: drop-shadow(0 0 16px rgba(200,160,32,0.95)) drop-shadow(0 0 5px rgba(210,168,28,0.70));
+      filter: drop-shadow(0 0 16px rgba(242,201,76,0.95)) drop-shadow(0 0 5px rgba(250,231,156,0.70));
     }
     body.is-hover .flame-outer { animation-duration: 0.09s; }
     body.is-hover .flame-mid   { animation-duration: 0.07s; }
@@ -118,7 +147,7 @@
     /* Click: push forward, max glow */
     body.is-clicking .cursor-rocket {
       transform: rotate(42deg) scale(1.1) translateY(-3px);
-      filter: drop-shadow(0 0 24px rgba(200,160,32,1.0)) drop-shadow(0 0 10px rgba(255,255,255,0.65));
+      filter: drop-shadow(0 0 24px rgba(242,201,76,1.0)) drop-shadow(0 0 10px rgba(255,255,255,0.65));
       transition: filter 0.06s, transform 0.06s;
     }
 
@@ -137,7 +166,7 @@
     .cursor-burst {
       position: fixed; pointer-events: none; z-index: 99996;
       width: 10px; height: 10px; border-radius: 50%;
-      border: 2px solid rgba(200,160,32,0.95);
+      border: 2px solid rgba(242,201,76,0.95);
       transform: translate(-50%, -50%);
       animation: cursor-burst 0.38s ease-out forwards;
     }
@@ -159,7 +188,7 @@
       100% { opacity: 0; transform: translate(-50%,-50%) translate(var(--sx), var(--sy)) scale(0); }
     }
 
-    /* â€”â€”â€” Ambient â€”â€”â€” */
+    /* ——— Ambient ——— */
     .ambient { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
     .ambient__blob {
       position: absolute; border-radius: 50%; filter: blur(100px);
@@ -176,7 +205,7 @@
     }
     .ambient__blob--3 {
       width: min(30vw, 260px); height: min(30vw, 260px); top: 35%; right: 18%; opacity: 0.20;
-      background: radial-gradient(circle, rgba(200,160,32,0.30) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(242,201,76,0.30) 0%, transparent 70%);
       animation-delay: -13s;
     }
     @keyframes blob-float {
@@ -185,24 +214,65 @@
       66% { transform: translate(-1%,2%) scale(0.98); }
     }
 
-    /* Robotic steel grid */
-    .grid-overlay {
+    /* ——— Premium micro-dust drift (subtle, theme-matching) ——— */
+    .micro-dust {
       position: fixed; inset: 0; z-index: 1; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.28) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.28) 1px, transparent 1px),
-        linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
-      background-size: 72px 72px, 72px 72px, 8px 8px, 8px 8px;
+      opacity: 0.22;
+      background:
+        radial-gradient(circle at 12% 22%, rgba(242,201,76,0.38) 0 1px, transparent 2px),
+        radial-gradient(circle at 32% 66%, rgba(242,201,76,0.26) 0 1px, transparent 2px),
+        radial-gradient(circle at 58% 18%, rgba(242,201,76,0.30) 0 1px, transparent 2px),
+        radial-gradient(circle at 74% 52%, rgba(242,201,76,0.22) 0 1px, transparent 2px),
+        radial-gradient(circle at 88% 30%, rgba(242,201,76,0.28) 0 1px, transparent 2px),
+        radial-gradient(circle at 18% 84%, rgba(242,201,76,0.20) 0 1px, transparent 2px),
+        radial-gradient(circle at 92% 78%, rgba(242,201,76,0.24) 0 1px, transparent 2px);
+      background-size: 520px 520px, 640px 640px, 720px 720px, 600px 600px, 820px 820px, 740px 740px, 900px 900px;
+      animation: dust-drift 26s linear infinite;
+      filter: blur(0.15px);
+    }
+    @keyframes dust-drift {
+      0% { transform: translate3d(0,0,0); }
+      50% { transform: translate3d(-18px, 12px, 0); }
+      100% { transform: translate3d(0,0,0); }
+    }
+
+    /* ——— Soft sheen sweep for hero visuals ——— */
+    .sheen {
+      position: relative;
+      overflow: hidden;
+    }
+    .sheen::after {
+      content: "";
+      position: absolute;
+      top: -20%;
+      left: -60%;
+      width: 55%;
+      height: 140%;
+      background: linear-gradient(110deg, transparent 0%, rgba(250,231,156,0.28) 45%, rgba(242,201,76,0.12) 55%, transparent 75%);
+      transform: skewX(-14deg) translateX(-120%);
+      mix-blend-mode: overlay;
+      opacity: 0.0;
+      animation: sheen-sweep 9.5s var(--ease-out) infinite;
+      pointer-events: none;
+    }
+    @keyframes sheen-sweep {
+      0%, 28% { opacity: 0; transform: skewX(-14deg) translateX(-120%); }
+      38% { opacity: 0.8; }
+      52% { opacity: 0; transform: skewX(-14deg) translateX(340%); }
+      100% { opacity: 0; transform: skewX(-14deg) translateX(340%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .micro-dust, .sheen::after { animation: none !important; }
     }
 
     #particle-canvas { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
 
-    /* â€”â€”â€” Layout â€”â€”â€” */
+    /* ——— Layout ——— */
     .page-wrap { position: relative; z-index: 3; min-height: 100vh; }
     .container { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
 
-    /* â€”â€”â€” Nav â€”â€”â€” */
+    /* ——— Nav ——— */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: var(--nav-h); display: flex; align-items: center;
@@ -216,6 +286,7 @@
     .nav__inner {
       display: flex; align-items: center; justify-content: space-between;
       width: min(1120px, calc(100% - 48px)); margin-inline: auto;
+      padding-top: calc(var(--ribbon-h) + var(--notice-h) + var(--ribbon-gap));
     }
     .brand {
       display: flex; align-items: center; gap: 0.55rem;
@@ -223,10 +294,46 @@
       letter-spacing: -0.02em; color: var(--dark);
     }
     .brand__logo-img {
-      width: 44px; height: 44px; border-radius: 10px; object-fit: cover;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15), 0 0 0 2px rgba(200,160,32,0.40);
+      width: 72px; height: 72px; border-radius: 16px; object-fit: cover;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15), 0 0 0 2px rgba(242,201,76,0.40);
       flex-shrink: 0;
     }
+
+    /* Stronger top accent line */
+    .nav::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: var(--ribbon-h);
+      background: linear-gradient(90deg, transparent, var(--gold-dim), var(--gold), var(--gold-bright), var(--gold), var(--gold-dim), transparent);
+      opacity: 0.95;
+      pointer-events: none;
+    }
+    .nav__notice {
+      position: absolute;
+      top: var(--ribbon-h);
+      left: 0;
+      right: 0;
+      height: var(--notice-h);
+      display: flex;
+      align-items: center;
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: inset 0 -1px 0 rgba(0,0,0,0.06);
+    }
+    .nav__notice-inner {
+      width: min(1120px, calc(100% - 48px));
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(0,0,0,0.72);
+      letter-spacing: 0.01em;
+    }
+    .nav__notice-flag { font-size: 0.95rem; line-height: 1; }
     .nav__links { display: flex; align-items: center; gap: 2rem; }
     .nav__links a {
       font-size: 0.875rem; font-weight: 600; color: var(--dark-2);
@@ -238,6 +345,8 @@
     }
     .nav__links a:hover { color: var(--dark); }
     .nav__links a:hover::after { width: 100%; }
+    /* Safety: never show a CTA button inside the desktop nav links row */
+    .nav__links .btn.btn--primary { display: none; }
     .nav__cta { padding: 0.55rem 1.15rem; font-size: 0.8125rem; font-weight: 700; }
     .nav__toggle {
       display: none; width: 44px; height: 44px; padding: 0;
@@ -269,18 +378,25 @@
       .nav__cta-mobile { display: inline-flex; margin-top: 0.75rem; width: 100%; justify-content: center; }
     }
 
-    /* â€”â€”â€” Buttons â€”â€”â€” */
+    /* ——— Buttons ——— */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       gap: 0.5rem; padding: 0.85rem 1.75rem; border-radius: 999px;
       font-family: var(--font-body); font-weight: 700; font-size: 0.9375rem;
       border: none; cursor: pointer; position: relative; overflow: hidden;
-      transition: transform 0.25s var(--ease-out), box-shadow 0.3s;
+      transform: translateZ(0);
+      transition: transform 0.22s var(--ease-out), box-shadow 0.28s var(--ease-out), filter 0.28s var(--ease-out);
     }
     .btn--primary {
       color: var(--dark);
-      background: linear-gradient(135deg, var(--gold-dim) 0%, var(--gold) 50%, var(--gold-bright) 100%);
-      box-shadow: 0 4px 20px rgba(200,160,32,0.40), 0 1px 0 rgba(255,255,255,0.50) inset;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 55%, rgba(0,0,0,0.06) 100%),
+        linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 48%, var(--gold-dim) 100%);
+      box-shadow:
+        0 16px 34px rgba(0,0,0,0.14),
+        0 7px 0 rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.65),
+        inset 0 -1px 0 rgba(0,0,0,0.10);
     }
     .btn--primary::before {
       content: ""; position: absolute; inset: 0;
@@ -290,7 +406,20 @@
     .btn--primary:hover::before { transform: translateX(120%); }
     .btn--primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(200,160,32,0.55), 0 1px 0 rgba(255,255,255,0.50) inset;
+      filter: saturate(1.03);
+      box-shadow:
+        0 22px 44px rgba(0,0,0,0.16),
+        0 9px 0 rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.65),
+        inset 0 -1px 0 rgba(0,0,0,0.10);
+    }
+    .btn--primary:active {
+      transform: translateY(2px) scale(0.99);
+      box-shadow:
+        0 12px 26px rgba(0,0,0,0.14),
+        0 4px 0 rgba(0,0,0,0.14),
+        inset 0 1px 0 rgba(255,255,255,0.55),
+        inset 0 -1px 0 rgba(0,0,0,0.12);
     }
     .btn--ghost {
       color: var(--dark); background: rgba(255,255,255,0.55);
@@ -302,48 +431,162 @@
     }
     .btn--block { width: 100%; }
 
-    /* â€”â€”â€” Hero â€”â€”â€” */
+    /* ——— Hero ——— */
     .hero {
       padding: calc(var(--nav-h) + 5rem) 0 6rem;
       position: relative; overflow: hidden;
     }
     .hero::before {
-      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
       background: linear-gradient(90deg, transparent, var(--gold), var(--gold-bright), var(--gold), transparent);
     }
     .hero__grid { display: grid; gap: 3rem; align-items: center; }
     @media (min-width: 900px) { .hero__grid { grid-template-columns: 1.1fr 0.9fr; gap: 4rem; } }
+
+    /* Soft ambient light (top-left) for premium depth */
+    .hero::after {
+      content: "";
+      position: absolute; inset: -12%;
+      background:
+        radial-gradient(700px 420px at 15% 18%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.0) 62%),
+        radial-gradient(800px 520px at 60% 30%, rgba(242,201,76,0.09) 0%, rgba(242,201,76,0.0) 60%);
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: soft-light;
+      opacity: 0.9;
+    }
+    .hero > .container { position: relative; z-index: 1; }
 
     .eyebrow {
       display: inline-flex; align-items: center; gap: 0.5rem;
       padding: 0.4rem 1rem; border-radius: 999px;
       font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--dark);
-      background: var(--gold); border: none;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.50) 0%, rgba(255,255,255,0.18) 55%, rgba(0,0,0,0.05) 100%),
+        linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 40%, var(--gold-dim) 100%);
+      border: 1px solid rgba(0,0,0,0.12);
       margin-bottom: 1.5rem; opacity: 0;
       animation: fade-up 0.9s var(--ease-out) 0.15s forwards;
-      box-shadow: 0 2px 14px rgba(200,160,32,0.45);
+      box-shadow:
+        0 10px 22px rgba(0,0,0,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.65),
+        inset 0 -1px 0 rgba(0,0,0,0.10);
+      position: relative;
+    }
+    .eyebrow::after {
+      content: "";
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.75) 45%, transparent 55%);
+      transform: translateX(-140%);
+      animation: eyebrow-shimmer 4.2s var(--ease-out) infinite;
+      opacity: 0.55;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+    @keyframes eyebrow-shimmer {
+      0%, 18% { transform: translateX(-140%); }
+      48%, 100% { transform: translateX(140%); }
     }
     .eyebrow__dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.45); }
 
     .hero h1 {
-      font-family: var(--font-display); font-weight: 800;
+      font-family: var(--font-hero); font-weight: 800;
       font-size: clamp(2.5rem, 5.5vw, 3.8rem); line-height: 1.05;
-      letter-spacing: -0.035em; margin: 0 0 1.25rem; color: var(--dark); opacity: 0;
+      letter-spacing: 0.02em; margin: 0 0 1.25rem; color: var(--dark); opacity: 0;
       animation: fade-up 0.9s var(--ease-out) 0.25s forwards;
+      text-align: center;
     }
+    .hero__title-img {
+      width: min(720px, 92vw);
+      height: auto;
+      display: block;
+      margin-inline: auto;
+      filter: drop-shadow(0 18px 22px rgba(0,0,0,0.18));
+    }
+    /* 3D metallic gold title */
     .hero h1 .gradient-text {
-      background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold-dim) 35%, var(--gold) 60%, var(--gold-bright) 100%);
+      position: relative;
+      display: inline-block;
+      background:
+        /* Match the badge gold tone */
+        linear-gradient(135deg,
+          var(--gold-pale) 0%,
+          var(--gold-bright) 22%,
+          var(--gold) 52%,
+          var(--gold-dim) 78%,
+          var(--gold-deep) 100%);
       -webkit-background-clip: text; background-clip: text; color: transparent;
+      /* crisp edge + depth */
+      -webkit-text-stroke: 0.6px rgba(255,255,255,0.20);
+      filter: drop-shadow(0 16px 22px rgba(0,0,0,0.20));
+      text-shadow:
+        /* bevel highlights */
+        0 -1px 0 rgba(255,255,255,0.75),
+        0  1px 0 rgba(0,0,0,0.20),
+        /* soft depth */
+        0 4px 0 rgba(0,0,0,0.12),
+        0 10px 20px rgba(0,0,0,0.16);
+    }
+    /* Fine brushed-metal texture clipped to the text */
+    .hero h1 .gradient-text .metal-texture {
+      position: absolute; inset: -8% -8%;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0.10) 0px,
+          rgba(255,255,255,0.10) 1px,
+          rgba(0,0,0,0.05) 2px,
+          rgba(0,0,0,0.05) 3px
+        );
+      mix-blend-mode: overlay;
+      opacity: 0.28;
+      pointer-events: none;
+      -webkit-mask: linear-gradient(#000, #000);
+      mask: linear-gradient(#000, #000);
+    }
+    /* Extrusion (fake 3D depth) */
+    .hero h1 .gradient-text::before {
+      content: attr(data-text);
+      position: absolute; inset: 0;
+      transform: translate(10px, 14px);
+      color: rgba(0,0,0,0.0);
+      -webkit-text-stroke: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.26), rgba(0,0,0,0.03));
+      -webkit-background-clip: text; background-clip: text;
+      opacity: 0.55;
+      filter: blur(0.2px);
+      z-index: -1;
+    }
+    /* Gloss highlight sweep */
+    .hero h1 .gradient-text::after {
+      content: "";
+      position: absolute; inset: -12% -10%;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.60) 46%, transparent 56%);
+      transform: translateX(-130%) rotate(-2deg);
+      opacity: 0.55;
+      mix-blend-mode: overlay;
+      animation: title-shine 7.5s var(--ease-out) infinite;
+      pointer-events: none;
+    }
+    @keyframes title-shine {
+      0%, 22% { transform: translateX(-130%) rotate(-2deg); opacity: 0; }
+      36% { opacity: 0.65; }
+      55% { transform: translateX(130%) rotate(-2deg); opacity: 0; }
+      100% { transform: translateX(130%) rotate(-2deg); opacity: 0; }
     }
     .hero__tagline {
       font-size: 1.1rem; color: var(--text-muted); max-width: 36ch; line-height: 1.7;
       margin: 0 0 2.25rem; opacity: 0;
       animation: fade-up 0.9s var(--ease-out) 0.35s forwards;
+      text-align: center;
+      margin-inline: auto;
     }
     .hero__actions {
       display: flex; flex-wrap: wrap; gap: 1rem; opacity: 0;
       animation: fade-up 0.9s var(--ease-out) 0.45s forwards;
+      justify-content: center;
     }
     @keyframes fade-up {
       from { opacity: 0; transform: translateY(24px); }
@@ -363,19 +606,44 @@
     }
     .hero__card-glow {
       position: absolute; top: -25%; right: -15%; width: 60%; height: 60%;
-      background: radial-gradient(circle, rgba(200,160,32,0.20) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(242,201,76,0.20) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero__svg-wrap {
       position: relative; padding: 2rem; height: 100%;
       display: flex; align-items: center; justify-content: center;
     }
-    .hero__svg-wrap svg { width: 100%; max-width: 420px; height: auto; }
+    .hero__svg-wrap svg { width: 100%; max-width: 560px; height: auto; }
     .float-1 { animation: float-y 7s ease-in-out infinite; }
     .float-2 { animation: float-y 9s ease-in-out infinite reverse; }
     @keyframes float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-    /* â€”â€”â€” Section common â€”â€”â€” */
+    /* Hero right visual image */
+    .hero-right {
+      width: 100%;
+      max-width: 700px;
+      filter: drop-shadow(0 18px 28px rgba(0,0,0,0.16));
+    }
+    .hero-right__frame {
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.35);
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.70),
+        inset 0 -1px 0 rgba(0,0,0,0.06);
+    }
+    .hero-right__img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-right { transition: none; transform: none !important; }
+    }
+
+    /* ——— Section common ——— */
     section { padding: 5.5rem 0; position: relative; }
     .section-head { max-width: 560px; margin-bottom: 3rem; }
     .section-head h2 {
@@ -388,7 +656,7 @@
       display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em;
       text-transform: uppercase; color: var(--dark); background: var(--gold);
       padding: 0.25rem 0.75rem; border-radius: 999px; margin-bottom: 1rem;
-      box-shadow: 0 2px 10px rgba(200,160,32,0.35);
+      box-shadow: 0 2px 10px rgba(242,201,76,0.35);
     }
     .reveal {
       opacity: 0; transform: translateY(24px);
@@ -396,8 +664,8 @@
     }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-    /* â€”â€”â€” About â€”â€”â€” */
-    .about { }
+    /* ——— About ——— */
+    .about { padding: 5.5rem 0; }
     .about__grid { display: grid; gap: 2.5rem; align-items: start; }
     @media (min-width: 800px) { .about__grid { grid-template-columns: 1fr 1fr; gap: 4rem; } }
 
@@ -417,18 +685,18 @@
     .about__icons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
     .icon-tile {
       padding: 1.5rem 1rem; border-radius: var(--radius-sm);
-      background: rgba(255,255,255,0.70); border: 1.5px solid rgba(200,160,32,0.30);
+      background: rgba(255,255,255,0.70); border: 1.5px solid rgba(242,201,76,0.30);
       box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center;
       transition: transform 0.3s var(--ease-out), border-color 0.3s, box-shadow 0.3s;
     }
     .icon-tile:hover {
       transform: translateY(-4px); border-color: var(--gold);
-      box-shadow: 0 8px 24px rgba(200,160,32,0.22);
+      box-shadow: 0 8px 24px rgba(242,201,76,0.22);
     }
     .icon-tile svg { width: 40px; height: 40px; margin-bottom: 0.5rem; }
     .icon-tile span { display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); }
 
-    /* â€”â€”â€” Stats band â€”â€”â€” */
+    /* ——— Stats band ——— */
     .stats-band {
       padding: 4rem 0;
       background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1f1f1f 100%);
@@ -456,7 +724,7 @@
     }
     .stat-item__label { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.55); letter-spacing: 0.03em; }
 
-    /* â€”â€”â€” Talent marquee â€”â€”â€” */
+    /* ——— Talent marquee ——— */
     .talent-marquee {
       --marquee-gap: clamp(2.5rem, 5vw, 4rem); --logo-h: clamp(28px, 4vw, 40px);
       padding: 5rem 0;
@@ -503,15 +771,16 @@
       object-fit: contain; transition: transform 0.3s;
     }
     .talent-marquee__logo:hover {
-      border-color: var(--gold); box-shadow: 0 4px 20px rgba(200,160,32,0.25);
+      border-color: var(--gold); box-shadow: 0 4px 20px rgba(242,201,76,0.25);
       transform: scale(1.05) translateY(-2px);
     }
     @media (prefers-reduced-motion: reduce) {
       .talent-marquee__row, .talent-marquee__logo { animation: none; }
     }
 
-    /* â€”â€”â€” Services â€”â€”â€” */
-    .services { }
+    /* ——— Services ——— */
+    .services { padding-block: 0; }
+    .services .section-label { margin: 0.5rem 0 1.25rem; }
     .service-cards { display: grid; gap: 1.5rem; }
     @media (min-width: 640px) { .service-cards { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 960px) { .service-cards { grid-template-columns: repeat(4, 1fr); } }
@@ -528,15 +797,15 @@
       transform: scaleX(0); transform-origin: left; transition: transform 0.35s var(--ease-out);
     }
     .service-card:hover {
-      transform: translateY(-6px); border-color: rgba(200,160,32,0.40);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(200,160,32,0.20);
+      transform: translateY(-6px); border-color: rgba(242,201,76,0.40);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 0 0 1px rgba(242,201,76,0.20);
     }
     .service-card:hover::after { transform: scaleX(1); }
     .service-card__icon {
       width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
       margin-bottom: 1.25rem;
-      background: linear-gradient(145deg, rgba(200,160,32,0.20), rgba(200,160,32,0.08));
-      border: 1.5px solid rgba(200,160,32,0.30);
+      background: linear-gradient(145deg, rgba(242,201,76,0.20), rgba(242,201,76,0.08));
+      border: 1.5px solid rgba(242,201,76,0.30);
     }
     .service-card__icon svg { width: 26px; height: 26px; }
     .service-card h3 {
@@ -545,8 +814,9 @@
     }
     .service-card p { margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
 
-    /* â€”â€”â€” Why â€”â€”â€” */
+    /* ——— Why ——— */
     .why { background: rgba(0,0,0,0.05); }
+    .why .section-label { margin-bottom: 1.25rem; }
     .why__list { display: grid; gap: 1.25rem; }
     @media (min-width: 720px) { .why__list { grid-template-columns: repeat(3, 1fr); } }
     .why-item {
@@ -556,26 +826,26 @@
       transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
     .why-item:hover {
-      border-color: rgba(200,160,32,0.45); transform: translateY(-3px);
-      box-shadow: 0 10px 36px rgba(0,0,0,0.10), 0 0 0 1px rgba(200,160,32,0.20);
+      border-color: rgba(242,201,76,0.45); transform: translateY(-3px);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.10), 0 0 0 1px rgba(242,201,76,0.20);
     }
     .why-item__icon {
       flex-shrink: 0; width: 48px; height: 48px; border-radius: 14px;
       display: grid; place-items: center;
       background: linear-gradient(145deg, var(--gold-bright), var(--gold-dim));
-      box-shadow: 0 4px 14px rgba(200,160,32,0.40);
+      box-shadow: 0 4px 14px rgba(242,201,76,0.40);
     }
     .why-item__icon svg { width: 22px; height: 22px; }
     .why-item h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin: 0 0 0.4rem; color: var(--dark); }
     .why-item p { margin: 0; font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
 
-    /* â€”â€”â€” Contact â€”â€”â€” */
+    /* ——— Contact ——— */
     .contact { background: rgba(0,0,0,0.05); }
     .contact__grid { display: grid; gap: 3rem; }
     @media (min-width: 860px) { .contact__grid { grid-template-columns: 1fr 1.1fr; align-items: start; } }
     .contact__direct { margin-top: 1.75rem; display: flex; flex-direction: column; gap: 1rem; }
-    .contact__direct a { font-size: 0.9375rem; font-weight: 600; color: var(--gold-deep); transition: color 0.2s; }
-    .contact__direct a:hover { color: var(--gold-dim); }
+    .contact__direct a { font-size: 0.9375rem; font-weight: 600; color: var(--dark); transition: color 0.2s; }
+    .contact__direct a:hover { color: var(--dark-2); }
     .contact__direct span {
       display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
       text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;
@@ -595,14 +865,14 @@
     .form-group input::placeholder, .form-group textarea::placeholder { color: #9a9a9a; }
     .form-group input:focus, .form-group textarea:focus {
       outline: none; border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(200,160,32,0.18); background: rgba(255,255,255,0.95);
+      box-shadow: 0 0 0 3px rgba(242,201,76,0.18); background: rgba(255,255,255,0.95);
     }
     .form-group textarea { min-height: 140px; resize: vertical; }
     .contact__honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
     .form-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; }
     .form-success {
       display: none; padding: 1rem; border-radius: var(--radius-sm);
-      background: rgba(200,160,32,0.15); border: 1.5px solid rgba(200,160,32,0.40);
+      background: rgba(242,201,76,0.15); border: 1.5px solid rgba(242,201,76,0.40);
       color: var(--gold-deep); font-size: 0.9rem; margin-top: 1rem;
     }
     .form-success.is-visible { display: block; }
@@ -614,7 +884,7 @@
     .form-error.is-visible { display: block; }
     .btn.is-loading { pointer-events: none; opacity: 0.7; }
 
-    /* â€”â€”â€” Footer â€”â€”â€” */
+    /* ——— Footer ——— */
     footer { padding: 3.5rem 0 4rem; background: #141414; color: rgba(255,255,255,0.80); }
     .footer__grid {
       display: flex; flex-direction: column; gap: 2rem; align-items: center; text-align: center;
@@ -632,22 +902,43 @@
     .footer__badge {
       display: inline-flex; align-items: center; gap: 0.4rem;
       font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: rgba(200,160,32,0.45); margin-top: 0.5rem;
+      text-transform: uppercase; color: rgba(242,201,76,0.45); margin-top: 0.5rem;
     }
     .footer__badge::before {
       content: ""; display: inline-block; width: 5px; height: 5px;
-      border-radius: 50%; background: rgba(200,160,32,0.40);
+      border-radius: 50%; background: rgba(242,201,76,0.40);
     }
+    .footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      align-items: center;
+      justify-content: center;
+      margin: 1.25rem 0 0;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.10);
+    }
+    @media (min-width: 640px) {
+      .footer__links { justify-content: flex-start; }
+    }
+    .footer__links a {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.78);
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+    .footer__links a:hover { color: var(--gold); }
     .social { display: flex; gap: 0.75rem; }
     .social a {
       width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(200,160,32,0.18);
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(242,201,76,0.18);
       color: rgba(255,255,255,0.45);
       transition: color 0.25s, border-color 0.25s, background 0.25s, transform 0.25s;
     }
     .social a:hover {
       color: var(--gold); border-color: var(--gold);
-      background: rgba(200,160,32,0.10); transform: translateY(-3px);
+      background: rgba(242,201,76,0.10); transform: translateY(-3px);
     }
     .social svg { width: 18px; height: 18px; }
   </style>
@@ -656,7 +947,7 @@
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader__inner">
       <div class="loader__mark" role="presentation">
-        <img src="logo.png" alt="UV Tech Solutions LLC" />
+        <img src="logo.png" alt="UV Tech Solutions LLC logo" />
       </div>
       <p class="loader__text">UV Tech Solutions</p>
     </div>
@@ -667,9 +958,9 @@
     <svg viewBox="0 0 32 56" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="rktGold" x1="4" y1="0" x2="28" y2="56" gradientUnits="userSpaceOnUse">
-          <stop offset="0%"   stop-color="#D4AA28"/>
-          <stop offset="48%"  stop-color="#C8A020"/>
-          <stop offset="100%" stop-color="#9A7810"/>
+          <stop offset="0%"   stop-color="#FAE79C"/>
+          <stop offset="48%"  stop-color="#F2C94C"/>
+          <stop offset="100%" stop-color="#D4A62A"/>
         </linearGradient>
         <linearGradient id="rktShine" x1="16" y1="0" x2="26" y2="0" gradientUnits="userSpaceOnUse">
           <stop offset="0%"   stop-color="white" stop-opacity="0"/>
@@ -712,7 +1003,7 @@
       <image href="logo.png" x="10.9" y="16.9" width="10.2" height="10.2"
              clip-path="url(#winClip)" preserveAspectRatio="xMidYMid slice"/>
       <!-- Gold ring border -->
-      <circle cx="16" cy="22" r="5.1" fill="none" stroke="#C8A020" stroke-width="1.1"/>
+      <circle cx="16" cy="22" r="5.1" fill="none" stroke="#F2C94C" stroke-width="1.1"/>
       <!-- Outer dark border for contrast -->
       <circle cx="16" cy="22" r="5.6" fill="none" stroke="#1A1A1A" stroke-width="0.8"/>
       <!-- Glass glare highlight -->
@@ -727,7 +1018,7 @@
       <g class="rocket-flame">
         <!-- Outer diffuse flame -->
         <ellipse class="flame-outer" cx="16" cy="49" rx="5.8" ry="8.5"
-                 fill="#C8A020" opacity="0.52"/>
+                 fill="#F2C94C" opacity="0.52"/>
         <!-- Mid glow -->
         <ellipse class="flame-mid"   cx="16" cy="48" rx="3.8" ry="6.2"
                  fill="#D0A832" opacity="0.78"/>
@@ -743,11 +1034,17 @@
     <div class="ambient__blob ambient__blob--2"></div>
     <div class="ambient__blob ambient__blob--3"></div>
   </div>
-  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="micro-dust" aria-hidden="true"></div>
   <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
   <div class="page-wrap">
     <header class="nav" id="nav">
+      <div class="nav__notice" aria-label="E-Verify notice">
+        <div class="nav__notice-inner">
+          <span class="nav__notice-flag" aria-hidden="true">🇺🇸</span>
+          <span>A United States Government E-Verified Company</span>
+        </div>
+      </div>
       <div class="nav__inner">
         <a href="#top" class="brand">
           <img src="logo.png" alt="UV Tech Solutions LLC logo" class="brand__logo-img" />
@@ -759,7 +1056,6 @@
           <a href="#services">Services</a>
           <a href="#why">Why Us</a>
           <a href="#contact">Contact</a>
-          <a href="#contact" class="btn btn--primary nav__cta-mobile">Get Started</a>
         </nav>
         <a href="#contact" class="btn btn--primary nav__cta">Get Started</a>
         <button type="button" class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
@@ -776,9 +1072,11 @@
           <div>
             <p class="eyebrow"><span class="eyebrow__dot"></span> American IT Excellence</p>
             <h1>
-              <span class="gradient-text">UV Tech Solutions</span><br />LLC
+              <span class="sheen">
+                <img src="assets/hero-title.png" alt="UV Tech Solutions LLC" class="hero__title-img" />
+              </span>
             </h1>
-            <p class="hero__tagline">Powering American Innovation â€” strategy, engineering, and cloud delivery for ambitious enterprises across the United States.</p>
+            <p class="hero__tagline">Powering American Innovation — strategy, engineering, and cloud delivery for ambitious enterprises across the United States.</p>
             <div class="hero__actions">
               <a href="#contact" class="btn btn--primary">Get Started</a>
               <a href="#services" class="btn btn--ghost">Explore Services</a>
@@ -788,53 +1086,11 @@
             <div class="hero__card">
               <div class="hero__card-glow"></div>
               <div class="hero__svg-wrap">
-                <svg class="float-1" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style="stop-color:#7a5c14"/>
-                      <stop offset="50%" style="stop-color:#f5cc5a"/>
-                      <stop offset="100%" style="stop-color:#d4a022"/>
-                    </linearGradient>
-                    <linearGradient id="g2" x1="0%" y1="100%" x2="100%" y2="0%">
-                      <stop offset="0%" style="stop-color:#f5cc5a;stop-opacity:0.3"/>
-                      <stop offset="100%" style="stop-color:#7a5c14;stop-opacity:0"/>
-                    </linearGradient>
-                    <linearGradient id="gw" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.9"/>
-                      <stop offset="100%" style="stop-color:#f5cc5a;stop-opacity:0.7"/>
-                    </linearGradient>
-                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                      <feGaussianBlur stdDeviation="4" result="b"/>
-                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
-                  </defs>
-                  <!-- Background card -->
-                  <rect x="30" y="50" width="220" height="155" rx="18" fill="rgba(212,160,34,0.06)" stroke="url(#g1)" stroke-width="1.2"/>
-                  <!-- UV path / waveform -->
-                  <path d="M55 195 L95 120 L130 195 M160 120 L195 195" fill="none" stroke="url(#gw)" stroke-width="2.5" filter="url(#glow)" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-                  <!-- Central circle -->
-                  <circle cx="200" cy="155" r="30" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.8"/>
-                  <circle cx="200" cy="155" r="9" fill="url(#g1)"/>
-                  <!-- Side info card -->
-                  <rect x="265" y="115" width="105" height="85" rx="12" fill="rgba(255,253,240,0.95)" stroke="rgba(200,160,32,0.35)" stroke-width="1.2"/>
-                  <rect x="278" y="132" width="55" height="6" rx="3" fill="rgba(200,146,14,0.60)"/>
-                  <rect x="278" y="146" width="40" height="4" rx="2" fill="rgba(200,146,14,0.30)"/>
-                  <rect x="278" y="158" width="48" height="4" rx="2" fill="rgba(26,22,16,0.14)"/>
-                  <rect x="278" y="170" width="32" height="4" rx="2" fill="rgba(26,22,16,0.08)"/>
-                  <!-- Connecting dots -->
-                  <circle cx="265" cy="155" r="3.5" fill="url(#g1)" opacity="0.8"/>
-                  <line x1="230" y1="155" x2="261" y2="155" stroke="rgba(245,204,90,0.30)" stroke-width="1.2" stroke-dasharray="4 3"/>
-                  <!-- Ground shadow -->
-                  <ellipse cx="200" cy="285" rx="125" ry="13" fill="url(#g2)" opacity="0.55"/>
-                  <!-- Floating accent bars -->
-                  <g class="float-2" opacity="0.88">
-                    <rect x="65" y="36" width="62" height="8" rx="4" fill="url(#g1)" opacity="0.55"/>
-                    <rect x="65" y="50" width="40" height="5" rx="2.5" fill="rgba(255,255,255,0.20)"/>
-                  </g>
-                  <!-- Top right corner chip -->
-                  <rect x="310" y="58" width="60" height="30" rx="8" fill="rgba(212,160,34,0.12)" stroke="rgba(212,160,34,0.25)" stroke-width="1"/>
-                  <path d="M323 73l4-6h10l4 6-4 6h-10z" fill="rgba(245,204,90,0.55)"/>
-                </svg>
+                <div class="hero-right" aria-hidden="true">
+                  <div class="hero-right__frame sheen">
+                    <img class="hero-right__img" src="assets/hero-right.png.jpg" alt="" loading="lazy" decoding="async" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -846,7 +1102,7 @@
         <div class="container">
           <div class="stats-band__grid">
             <div class="stat-item reveal">
-              <div class="stat-item__value">50+</div>
+              <div class="stat-item__value">300+</div>
               <div class="stat-item__label">US Enterprise Clients</div>
             </div>
             <div class="stat-item reveal">
@@ -858,7 +1114,7 @@
               <div class="stat-item__label">Years of Experience</div>
             </div>
             <div class="stat-item reveal">
-              <div class="stat-item__value">200+</div>
+              <div class="stat-item__value">600+</div>
               <div class="stat-item__label">Projects Delivered</div>
             </div>
           </div>
@@ -870,12 +1126,12 @@
           <div class="section-head reveal">
             <p class="section-label">About</p>
             <h2>Technology partners for the modern American enterprise</h2>
-            <p>We help US organizations design, build, and scale resilient digital products â€” from first architecture sketch to production-grade cloud operations.</p>
+            <p>We help US organizations design, build, and scale resilient digital products — from first architecture sketch to production-grade cloud operations.</p>
           </div>
           <div class="about__grid">
             <div class="glass-panel reveal">
-              <p style="margin: 0 0 1rem; color: var(--text-muted); line-height: 1.75;">UV Tech Solutions LLC blends deep engineering craft with pragmatic consulting. Whether you are modernizing legacy systems or launching a new platform, we align technology with business outcomes â€” clear roadmaps, measurable milestones, and teams that ship.</p>
-              <p style="margin: 0; color: var(--text-muted); line-height: 1.75;">Based in the United States, our engagements span advisory, delivery, and talent â€” so you get continuity from strategy through execution, all within US compliance and security standards.</p>
+              <p style="margin: 0 0 1rem; color: var(--text-muted); line-height: 1.75;">UV Tech Solutions LLC blends deep engineering craft with pragmatic consulting. Whether you are modernizing legacy systems or launching a new platform, we align technology with business outcomes — clear roadmaps, measurable milestones, and teams that ship.</p>
+              <p style="margin: 0; color: var(--text-muted); line-height: 1.75;">Based in the United States, our engagements span advisory, delivery, and talent — so you get continuity from strategy through execution, all within US compliance and security standards.</p>
             </div>
             <div class="reveal">
               <div class="about__icons">
@@ -931,6 +1187,9 @@
                 <span class="talent-marquee__logo" title="Oracle"><img src="logos/oracle.svg" alt="Oracle" width="120" height="48" loading="lazy" decoding="async" /></span>
                 <span class="talent-marquee__logo" title="Intel"><img src="logos/intel.svg" alt="Intel" width="120" height="48" loading="lazy" decoding="async" /></span>
                 <span class="talent-marquee__logo" title="Cisco"><img src="logos/cisco.svg" alt="Cisco" width="120" height="48" loading="lazy" decoding="async" /></span>
+                <span class="talent-marquee__logo" title="Austin Energy"><img src="logos/austin-energy.png" alt="Austin Energy" width="120" height="48" loading="lazy" decoding="async" /></span>
+                <span class="talent-marquee__logo" title="City of Austin"><img src="logos/city-of-austin.png" alt="City of Austin" width="120" height="48" loading="lazy" decoding="async" /></span>
+                <span class="talent-marquee__logo" title="City of Houston"><img src="logos/city-of-houston.png" alt="City of Houston" width="120" height="48" loading="lazy" decoding="async" /></span>
               </div>
             </div>
           </div>
@@ -958,7 +1217,7 @@
           <div class="section-head reveal">
             <p class="section-label">Services</p>
             <h2>End-to-end capabilities</h2>
-            <p>Focused offerings that scale with your roadmap â€” from greenfield builds to enterprise integration across the US market.</p>
+            <p>Focused offerings that scale with your roadmap — from greenfield builds to enterprise integration across the US market.</p>
           </div>
           <div class="service-cards">
             <article class="service-card reveal">
@@ -969,7 +1228,7 @@
                 </svg>
               </div>
               <h3>Software Development</h3>
-              <p>Full-stack product teams, APIs, and platforms built for maintainability and speed of iteration â€” shipped to meet US enterprise standards.</p>
+              <p>Full-stack product teams, APIs, and platforms built for maintainability and speed of iteration — shipped to meet US enterprise standards.</p>
             </article>
             <article class="service-card reveal">
               <div class="service-card__icon">
@@ -979,7 +1238,7 @@
                 </svg>
               </div>
               <h3>Cloud Solutions</h3>
-              <p>Secure, cost-aware architectures on AWS, Azure, and GCP â€” IaC, observability, and resilient operations optimized for US data residency.</p>
+              <p>Secure, cost-aware architectures on AWS, Azure, and GCP — IaC, observability, and resilient operations optimized for US data residency.</p>
             </article>
             <article class="service-card reveal">
               <div class="service-card__icon">
@@ -999,7 +1258,7 @@
                 </svg>
               </div>
               <h3>Staffing Solutions</h3>
-              <p>Curated US-based talent for critical initiatives â€” W2 contractors and specialists who integrate seamlessly with your team culture.</p>
+              <p>Curated US-based talent for critical initiatives — W2 contractors and specialists who integrate seamlessly with your team culture.</p>
             </article>
           </div>
         </div>
@@ -1010,7 +1269,7 @@
           <div class="section-head reveal">
             <p class="section-label">Why choose us</p>
             <h2>Built for outcomes, not slides</h2>
-            <p>We obsess over clarity, craft, and continuity â€” so your roadmap stays executable long after kickoff.</p>
+            <p>We obsess over clarity, craft, and continuity — so your roadmap stays executable long after kickoff.</p>
           </div>
           <div class="why__list">
             <div class="why-item reveal">
@@ -1032,7 +1291,7 @@
               </div>
               <div>
                 <h3>Reliability</h3>
-                <p>Operational maturity â€” monitoring, SOC 2-aligned security practices, and documentation you can depend on.</p>
+                <p>Operational maturity — monitoring, SOC 2-aligned security practices, and documentation you can depend on.</p>
               </div>
             </div>
             <div class="why-item reveal">
@@ -1044,7 +1303,7 @@
               </div>
               <div>
                 <h3>Innovation</h3>
-                <p>Practical adoption of modern tooling â€” AI, automation, and cloud-native patterns where they reduce risk and add real value.</p>
+                <p>Practical adoption of modern tooling — AI, automation, and cloud-native patterns where they reduce risk and add real value.</p>
               </div>
             </div>
           </div>
@@ -1057,7 +1316,7 @@
             <div class="reveal">
               <p class="section-label">Contact</p>
               <h2 style="font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.1rem); margin: 0 0 1rem; letter-spacing: -0.025em; color: var(--dark);">Let's build what's next</h2>
-              <p style="margin: 0; color: var(--text-muted); max-width: 36ch;">Tell us about your goals â€” we'll respond with a clear next step. No jargon, no endless back-and-forth.</p>
+              <p style="margin: 0; color: var(--text-muted); max-width: 36ch;">Tell us about your goals — we'll respond with a clear next step. No jargon, no endless back-and-forth.</p>
               <div class="contact__direct">
                 <div>
                   <span>Phone</span>
@@ -1106,7 +1365,7 @@
               </div>
               <button type="submit" class="btn btn--primary btn--block" id="contactSubmit">Send message</button>
               <p class="form-note">We'll reply within one business day. Your details are kept private and never shared.</p>
-              <p class="form-success" id="formSuccess" role="status">Thank you â€” we received your message and will get back to you soon.</p>
+              <p class="form-success" id="formSuccess" role="status">Thank you — we received your message and will get back to you soon.</p>
               <p class="form-error" id="formError" role="alert">Something went wrong. Please try again or email us directly.</p>
             </form>
           </div>
@@ -1123,6 +1382,13 @@
           </div>
           <p class="footer__meta">Â© <span id="year"></span> UV Tech Solutions LLC. Powering American Innovation.</p>
           <p class="footer__badge">Registered LLC Â· United States</p>
+          <nav class="footer__links" aria-label="Footer links">
+            <a href="#about">Company Overview</a>
+            <a href="#services">Insights & Articles</a>
+            <a href="#contact">Contact & Partnerships</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="#contact">Terms & Conditions</a>
+          </nav>
         </div>
         <div class="social" aria-label="Social links">
           <a href="#" aria-label="LinkedIn">
@@ -1146,7 +1412,8 @@
       /* Loader */
       window.addEventListener("load", function () {
         var loader = document.getElementById("loader");
-        if (loader) setTimeout(function () { loader.classList.add("is-hidden"); }, 500);
+        if (!loader) return;
+        setTimeout(function () { loader.classList.add("is-hidden"); }, 2000);
       });
 
       /* Year */
@@ -1181,7 +1448,7 @@
         });
       }
 
-      /* â€”â€”â€” Golden Rocket Cursor â€”â€”â€” */
+      /* ——— Golden Rocket Cursor ——— */
       (function () {
         if (!window.matchMedia("(pointer: fine)").matches) return;
         var rocket = document.getElementById("cursorRocket");
@@ -1197,7 +1464,7 @@
         }
         posRocket();
 
-        /* Mouse move â€” update pos + spawn trail */
+        /* Mouse move — update pos + spawn trail */
         document.addEventListener("mousemove", function (e) {
           mx = e.clientX; my = e.clientY;
           posRocket();
@@ -1318,7 +1585,7 @@
           /* Alternate between warm gold and bright white for shimmer */
           var gold = Math.random() > 0.4;
           ctx.fillStyle = gold
-            ? "rgba(200,160,32," + this.a.toFixed(2) + ")"
+            ? "rgba(242,201,76," + this.a.toFixed(2) + ")"
             : "rgba(255,245,210," + (this.a * 0.8).toFixed(2) + ")";
           ctx.fill();
         };
@@ -1443,7 +1710,7 @@
         };
         Particle.prototype.draw = function () {
           ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(200, 160, 32, " + this.a + ")"; ctx.fill();
+          ctx.fillStyle = "rgba(242, 201, 76, " + this.a + ")"; ctx.fill();
         };
         function initParticles() {
           particles = [];
@@ -1459,7 +1726,7 @@
               var dist = Math.sqrt(dx * dx + dy * dy);
               if (dist < 110) {
                 ctx.beginPath();
-                ctx.strokeStyle = "rgba(200, 160, 32, " + (0.15 * (1 - dist / 110)) + ")";
+                ctx.strokeStyle = "rgba(242, 201, 76, " + (0.15 * (1 - dist / 110)) + ")";
                 ctx.lineWidth = 0.6;
                 ctx.moveTo(particles[a].x, particles[a].y); ctx.lineTo(particles[b].x, particles[b].y);
                 ctx.stroke();
@@ -1473,7 +1740,7 @@
         tick();
       }
 
-      /* Contact form â€” Netlify Forms */
+      /* Contact form — Netlify Forms */
       var form = document.getElementById("contactForm");
       var successEl = document.getElementById("formSuccess");
       var errorEl = document.getElementById("formError");
@@ -1481,13 +1748,13 @@
       if (form) {
         form.addEventListener("submit", function (e) {
           e.preventDefault();
-          if (successEl) { successEl.classList.remove("is-visible"); successEl.textContent = "Thank you â€” we received your message and will get back to you soon."; }
+          if (successEl) { successEl.classList.remove("is-visible"); successEl.textContent = "Thank you — we received your message and will get back to you soon."; }
           if (errorEl) { errorEl.classList.remove("is-visible"); errorEl.textContent = "Something went wrong. Please try again or email us directly."; }
           var proto = window.location.protocol;
           if (proto !== "http:" && proto !== "https:") {
             var nameEl = document.getElementById("name"), emailEl = document.getElementById("email"), msgEl = document.getElementById("message");
             var nameVal = nameEl ? nameEl.value.trim() : "", emailVal = emailEl ? emailEl.value.trim() : "", msgVal = msgEl ? msgEl.value.trim() : "";
-            var subj = encodeURIComponent("Contact â€” " + (nameVal || "UV Tech Solutions site"));
+            var subj = encodeURIComponent("Contact — " + (nameVal || "UV Tech Solutions site"));
             var body = encodeURIComponent("Name: " + nameVal + "\nEmail: " + emailVal + "\n\nMessage:\n" + msgVal);
             window.location.href = "mailto:info@uvtechsolutionllc.com?subject=" + subj + "&body=" + body;
             if (successEl) { successEl.textContent = "Your email app should open with this draft. Send it to reach us directly."; successEl.classList.add("is-visible"); successEl.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
