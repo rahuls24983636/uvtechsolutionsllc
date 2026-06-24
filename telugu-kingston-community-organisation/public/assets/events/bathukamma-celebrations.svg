@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-label="Bathukamma Celebrations placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop stop-color="#f4b63f"/>
+      <stop offset="1" stop-color="#526d3f"/>
+    </linearGradient>
+    <pattern id="dots" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="18" r="3" fill="#fff7e8" opacity=".35"/>
+    </pattern>
+  </defs>
+  <rect width="900" height="600" fill="url(#bg)"/>
+  <rect width="900" height="600" fill="url(#dots)"/>
+  <circle cx="450" cy="300" r="170" fill="#fff7e8" opacity=".24"/>
+  <path d="M450 150c82 78 126 137 126 202 0 70-56 120-126 120s-126-50-126-120c0-65 44-124 126-202Z" fill="#651f1f" opacity=".86"/>
+  <circle cx="450" cy="310" r="76" fill="#f4b63f"/>
+  <circle cx="450" cy="310" r="38" fill="#b85f3a"/>
+  <text x="450" y="528" text-anchor="middle" font-family="Georgia, serif" font-size="54" font-weight="700" fill="#fff7e8">Bathukamma</text>
+</svg>
