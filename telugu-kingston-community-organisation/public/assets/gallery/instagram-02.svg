@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Cultural Performances placeholder">
-  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#7a4a2f"/><stop offset="1" stop-color="#b85f3a"/></linearGradient></defs>
-  <rect width="800" height="1000" fill="url(#g)"/>
-  <circle cx="400" cy="290" r="74" fill="#f4b63f"/>
-  <path d="M230 590c90-180 250-180 340 0" fill="none" stroke="#fff7e8" stroke-width="46" stroke-linecap="round"/>
-  <path d="M286 450h228M400 360v260" stroke="#651f1f" stroke-width="32" stroke-linecap="round"/>
-  <text x="400" y="865" text-anchor="middle" font-family="Georgia, serif" font-size="50" font-weight="700" fill="#fff7e8">Performances</text>
-</svg>
